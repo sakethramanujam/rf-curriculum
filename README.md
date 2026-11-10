@@ -27,6 +27,8 @@ quiz/verify_calcs.py      independent numerical check of every calc item
 tools/smith_gamma.py      Γ, VSWR, return loss, Zin(ℓ)
 tools/microstrip_width.py W/h synthesis and analysis
 tools/array_factor.py     uniform linear array factor and HPBW
+site/                     interactive explorers (Vite + TypeScript), published to GitHub Pages
+.github/workflows/        Pages build-and-deploy workflow
 ```
 
 ## How to use the repo
@@ -48,6 +50,66 @@ tools/array_factor.py     uniform linear array factor and HPBW
 Python 3.9+ with `numpy` and `matplotlib` is enough (`pip install -r requirements.txt`).
 All quiz and tool paths are resolved relative to the files themselves, so you
 can launch them from the repo root or from another working directory.
+
+## Site
+
+An interactive companion lives in `site/` and is published at
+**<http://s3r1.co/rf-curriculum/>**. It is a set of explorable explanations, one
+per idea, and each links back to the matching study sheet in `modules/` and its
+book chapter:
+
+| Explorer | What you can do | Notes |
+|---|---|---|
+| Plane waves | Rotate E and H in 3-D, switch between linear, circular and elliptical polarization, make the medium lossy and watch the skin depth | `01` |
+| Transmission lines | Watch incident and reflected waves form a standing wave; pick an open, short, matched or R + jX load; add loss | `02` |
+| Smith chart | Drag the load, slide toward the generator, and step through a single-stub or L-section match | `02`, `05` |
+| S-parameters | Follow power flow through a series or shunt Z, a line section, a pad or an amplifier, with a mismatched port 2 | `04` |
+| Waveguides | TE10, TE20, TE11 and TM11 field maps, cutoff, a dispersion diagram, and WR-90, WR-28 and WR-3.4 presets | `03` |
+| Dipoles | Exact field lines of a sinusoidal-current dipole; patterns, D0 and R_r for any length | `A3` |
+| Phased arrays | Steer N elements, watch grating lobes enter the visible ψ window, and see polar and 3-D patterns | `A5` |
+| Link budget | A Friis or radar dB waterfall against the kTB + NF noise floor, plus received power vs range | `13`, `A1` |
+
+The key equations (Maxwell, telegrapher, wave equation, Γ, Z_in, S-parameters,
+Friis, radar, array factor, dipole far field and waveguide cutoff) are
+"exploding": tap or hover any term to see its meaning and units, and jump to
+the slider that controls it.
+
+Everything runs in the browser. The physics lives in a pure module,
+`site/src/lib/physics.ts`, and the unit tests in `site/tests/` check it against
+hand calculations and textbook values.
+
+### Local development
+
+Requires Node 22.12 or newer (CI uses Node 22).
+
+```bash
+cd site && npm ci && npm run dev     # http://localhost:5173/rf-curriculum/
+npm test                             # Vitest: physics and privacy-guard tests
+npm run build                        # type-check + production build into site/dist
+npm run preview                      # serve the built site locally
+npm run guard                        # scan site/dist for LAN IPs, home paths and private names
+```
+
+The Vite `base` is `/rf-curriculum/`, because GitHub Pages serves this repo
+under the user site's custom domain. Pages are hash-routed (`#/smith`), so deep
+links work without a 404 fallback. There is no `CNAME` file in this repo; the
+custom domain belongs to the user Pages site.
+
+### Deploy flow
+
+`.github/workflows/pages.yml` runs on every push to `main`, and can also be
+started by hand from the Actions tab, though it only deploys from `main`:
+
+1. `npm ci`, `npm test` and `npm run build` in `site/` on Node 22.
+2. The privacy guard fails the run if `site/dist` contains a private IP
+   (`192.168.*` or `100.*.*.*`), a home-directory path, or one of the
+   blocked private names. Those names are stored only as SHA-256 hashes in
+   `site/scripts/privacy-guard.mjs`.
+3. `actions/configure-pages`, `actions/upload-pages-artifact` (with `site/dist`)
+   and `actions/deploy-pages` publish the build to the `github-pages`
+   environment.
+
+Pages must be set to deploy from **GitHub Actions** (Settings → Pages → Source).
 
 ## Rough 12-week plan
 

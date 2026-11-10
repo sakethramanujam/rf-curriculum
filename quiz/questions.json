@@ -1,0 +1,1642 @@
+[
+  {
+    "id": "p01-01",
+    "module": "01-em-review",
+    "topic": "Maxwell / constitutive",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "In the e^{jωt} convention, how is ohmic loss folded into a complex permittivity, and what is the loss tangent?",
+    "answer": "ε_c = ε' - jε'' with ε'' = σ/ω for a simple conductor model (or whatever dielectric imaginary part the material has). The loss tangent is tanδ = ε''/ε'.",
+    "ref": "Pozar 4th ed., Ch. 1, constitutive relations and loss tangent"
+  },
+  {
+    "id": "p01-02",
+    "module": "01-em-review",
+    "topic": "plane waves",
+    "difficulty": 1,
+    "type": "derive",
+    "question": "Starting from the source-free phasor Maxwell equations in a lossless isotropic medium, recover the Helmholtz equation for E and identify k.",
+    "answer": "Take the curl of ∇×E = -jωμH and substitute ∇×H = jωεE, use the identity ∇×∇×E = ∇(∇·E) - ∇²E and ∇·E = 0 to get ∇²E + ω²με E = 0. Thus k = ω√(με).",
+    "ref": "Pozar 4th ed., Ch. 1, wave equation / uniform plane waves"
+  },
+  {
+    "id": "p01-03",
+    "module": "01-em-review",
+    "topic": "intrinsic impedance",
+    "difficulty": 1,
+    "type": "calc",
+    "question": "Using μ0 = 4π×10^{-7} H/m and ε0 = 8.854×10^{-12} F/m, compute η0 = √(μ0/ε0) in ohms, to two decimal places.",
+    "answer": "η0 = 376.73 Ω. (120π = 376.99 Ω is the usual rounded stand-in.)",
+    "ref": "Pozar 4th ed., Ch. 1, plane-wave intrinsic impedance"
+  },
+  {
+    "id": "p01-04",
+    "module": "01-em-review",
+    "topic": "skin depth",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "Copper has σ = 5.8×10^7 S/m and μ = μ0. What is the skin depth at 10.00 GHz, in micrometers? Also give the surface resistance Rs = 1/(σδ) in Ω/sq.",
+    "answer": "δ = 1/√(π f μ σ) = 0.661 μm. Rs = 1/(σδ) = 0.0261 Ω/sq.",
+    "ref": "Pozar 4th ed., Ch. 1, skin depth / good-conductor approximation"
+  },
+  {
+    "id": "p01-05",
+    "module": "01-em-review",
+    "topic": "skin depth",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "Using the 10 GHz copper skin depth 0.661 μm and δ ∝ 1/√f, what is δ at 270 GHz, in micrometers? What is Rs at 270 GHz, in Ω/sq?",
+    "answer": "δ(270 GHz) = 0.661×√(10/270) = 0.127 μm. Rs scales as √f, so Rs(270 GHz) = 0.0261×√(27) = 0.136 Ω/sq.",
+    "ref": "Pozar 4th ed., Ch. 1, skin depth"
+  },
+  {
+    "id": "p01-06",
+    "module": "01-em-review",
+    "topic": "polarization",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "When is a time-harmonic uniform plane wave linearly polarized, and when is it circularly polarized?",
+    "answer": "Linear: the two transverse E components are in phase (or only one is present), so the tip of E traces a line. Circular: the two transverse components are equal in amplitude and ±90° apart, so the tip traces a circle. Anything else (unequal amplitude and/or other phase) is elliptical.",
+    "ref": "Pozar 4th ed., Ch. 1, polarization"
+  },
+  {
+    "id": "p01-07",
+    "module": "01-em-review",
+    "topic": "Poynting",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "A +z traveling plane wave in free space has a peak phasor E = 1.00 V/m (the usual RMS-free phasor convention of this curriculum, so time-average uses the 1/2 factor). Using η0 = 376.73 Ω, what is the time-average power density, in mW/m²?",
+    "answer": "S_av = (1/2)|E|²/η0 = 0.5/376.73 = 1.327×10^{-3} W/m² = 1.327 mW/m².",
+    "ref": "Pozar 4th ed., Ch. 1, Poynting vector"
+  },
+  {
+    "id": "p02-01",
+    "module": "02-transmission-lines",
+    "topic": "Gamma definition",
+    "difficulty": 1,
+    "type": "derive",
+    "question": "Derive Γ_L = (Z_L - Z0)/(Z_L + Z0) from continuity of V and I at a load on a lossless line.",
+    "answer": "At the load, V = V+ + V- and I = (V+ - V-)/Z0, and V = Z_L I. Eliminate I: V+ + V- = (Z_L/Z0)(V+ - V-). Collect V-/V+ to get Γ_L = (Z_L - Z0)/(Z_L + Z0).",
+    "ref": "Pozar 4th ed., §2.3"
+  },
+  {
+    "id": "p02-02",
+    "module": "02-transmission-lines",
+    "topic": "open/short/match",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "What is Γ_L for an open circuit, a short circuit, and a matched load? Where do purely reactive loads sit in the Γ-plane?",
+    "answer": "Open: Γ = +1. Short: Γ = −1. Matched (Z_L = Z0): Γ = 0. Purely reactive loads have |Γ| = 1 and lie on the unit circle (other than the exact open/short points, at a continuum of phases).",
+    "ref": "Pozar 4th ed., §2.3"
+  },
+  {
+    "id": "p02-03",
+    "module": "02-transmission-lines",
+    "topic": "Gamma / VSWR / RL",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "A load Z_L = 100 + j50 Ω terminates a lossless 50 Ω line. Compute Γ_L (rectangular form), |Γ_L|, arg(Γ_L) in degrees, VSWR, return loss in dB, and the reflected-power fraction.",
+    "answer": "Γ_L = 0.400 + j0.200, |Γ_L| = 0.4472, arg = 26.57°. VSWR = 2.618. RL = 6.99 dB. |Γ|² = 0.200 (20% reflected).",
+    "ref": "Pozar 4th ed., §2.3"
+  },
+  {
+    "id": "p02-04",
+    "module": "02-transmission-lines",
+    "topic": "Zin electrical length",
+    "difficulty": 3,
+    "type": "calc",
+    "question": "For the same Z_L = 100 + j50 Ω on a 50 Ω lossless line, what is Z_in looking toward the load through 60° of electrical length? Give Re and Im in ohms.",
+    "answer": "Z_in = 31.91 - j35.61 ohm, i.e. Re = 31.91 ohm and Im = -35.61 ohm.",
+    "ref": "Pozar 4th ed., §2.3 (input impedance)"
+  },
+  {
+    "id": "p02-05",
+    "module": "02-transmission-lines",
+    "topic": "75 ohm load",
+    "difficulty": 1,
+    "type": "calc",
+    "question": "A real 75 Ω load sits on a lossless 50 Ω line. Compute Γ, VSWR, and return loss in dB.",
+    "answer": "Γ = (75−50)/(75+50) = 0.200. VSWR = 1.50. RL = 13.98 dB.",
+    "ref": "Pozar 4th ed., §2.3"
+  },
+  {
+    "id": "p02-06",
+    "module": "02-transmission-lines",
+    "topic": "quarter-wave special cases",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "State Z_in of a lossless line of length λ/4 terminated in (a) a short, (b) an open, (c) a real load Z_L. Also, what does a λ/2 line do?",
+    "answer": "(a) Quarter-wave short looks like an open (Z_in → ∞). (b) Quarter-wave open looks like a short (Z_in = 0). (c) Z_in = Z0²/Z_L. A half-wave line repeats the load: Z_in = Z_L.",
+    "ref": "Pozar 4th ed., §2.3"
+  },
+  {
+    "id": "p02-07",
+    "module": "02-transmission-lines",
+    "topic": "VSWR from Gamma",
+    "difficulty": 1,
+    "type": "derive",
+    "question": "Derive VSWR = (1+|Γ|)/(1−|Γ|) from the definition of voltage standing-wave ratio on a lossless line.",
+    "answer": "On a lossless line the voltage magnitude ranges from |V+| (1+|Γ|) at a max to |V+| (1−|Γ|) at a min. VSWR is defined as |V|_max/|V|_min, which is (1+|Γ|)/(1−|Γ|).",
+    "ref": "Pozar 4th ed., §2.3"
+  },
+  {
+    "id": "p02-08",
+    "module": "02-transmission-lines",
+    "topic": "low-loss alpha",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "Write the usual low-loss approximation for the attenuation constant α of a transmission line in terms of R, G, and Z0.",
+    "answer": "α ≈ R/(2 Z0) + G Z0 / 2 nepers per unit length. The first term is series-conductor (and radiation, if lumped into R) loss; the second is shunt dielectric loss.",
+    "ref": "Pozar 4th ed., §2.1–2.2"
+  },
+  {
+    "id": "p02-09",
+    "module": "02-transmission-lines",
+    "topic": "velocity factor",
+    "difficulty": 1,
+    "type": "calc",
+    "question": "A polyethylene-filled coax has ε_r = 2.30. What is the velocity factor, and what is the physical length of a 90° section at 1.00 GHz? Use c = 3.00×10^8 m/s.",
+    "answer": "VF = 1/√2.30 = 0.659. v_p = 1.978×10^8 m/s. A 90° (λ/4) section is v_p/(4f) = 49.4 mm.",
+    "ref": "Pozar 4th ed., Ch. 2"
+  },
+  {
+    "id": "p02-10",
+    "module": "02-transmission-lines",
+    "topic": "Smith chart rotation",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "How does Γ transform as you move a distance ℓ toward the generator on a lossless line, and how much chart rotation is a quarter-wave?",
+    "answer": "Γ(ℓ) = Γ_L exp(−j 2 βℓ) toward the generator. A quarter-wave (βℓ = 90°) produces 180° of rotation on the Smith chart — a half turn — which is why a λ/4 line inverts a real impedance.",
+    "ref": "Pozar 4th ed., §2.4 (Smith chart)"
+  },
+  {
+    "id": "p03-01",
+    "module": "03-lines-and-waveguides",
+    "topic": "TEM vs TE/TM",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "Why can a hollow metal waveguide not support a TEM mode, and what is the dominant mode of air-filled rectangular guide with a > b?",
+    "answer": "A TEM mode needs a unique voltage-current path (at least two disconnected conductors) so that a static-like transverse field can exist with no longitudinal E or H. A simply connected hollow pipe cannot. The dominant mode is TE10, with cutoff c/(2a) when air-filled.",
+    "ref": "Pozar 4th ed., Ch. 3, rectangular waveguide"
+  },
+  {
+    "id": "p03-02",
+    "module": "03-lines-and-waveguides",
+    "topic": "WR-90 cutoff",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "WR-90 has a = 0.900 in = 22.86 mm. Using c = 3.00×10^8 m/s, compute the TE10 cutoff frequency in GHz.",
+    "answer": "f_c = c/(2a) = 3.00e8 / (2×0.02286) = 6.562 GHz.",
+    "ref": "Pozar 4th ed., Ch. 3, rectangular waveguide cutoff"
+  },
+  {
+    "id": "p03-03",
+    "module": "03-lines-and-waveguides",
+    "topic": "WR3.4 cutoff",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "WR-3.4 has a = 0.034 in = 0.8636 mm. Using c = 3.00×10^8 m/s, compute the TE10 cutoff in GHz, and the TE20 cutoff (which sets the top of the recommended band).",
+    "answer": "f_c(TE10) = 3.00e8 / (2×0.8636e-3) = 173.69 GHz. TE20 cuts off at 2 f_c = 347.38 GHz. The recommended 220–330 GHz band sits from 1.27 f_c to 1.90 f_c, just under TE20.",
+    "ref": "Pozar 4th ed., Ch. 3; EIA waveguide banding"
+  },
+  {
+    "id": "p03-04",
+    "module": "03-lines-and-waveguides",
+    "topic": "guide wavelength",
+    "difficulty": 3,
+    "type": "calc",
+    "question": "For air-filled WR-3.4 (f_c = 173.69 GHz) at 270.0 GHz, compute λ0, √(1−(f_c/f)²), and the guide wavelength λ_g, all in mm. Use c = 3.00×10^8 m/s.",
+    "answer": "λ0 = 1.111 mm. f_c/f = 0.6433, √(1−(f_c/f)²) = 0.7656. λ_g = λ0 / 0.7656 = 1.451 mm.",
+    "ref": "Pozar 4th ed., Ch. 3, guide wavelength"
+  },
+  {
+    "id": "p03-05",
+    "module": "03-lines-and-waveguides",
+    "topic": "Z_TE",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "Using η0 = 376.73 Ω and the 270 GHz WR-3.4 factor √(1−(f_c/f)²) = 0.7656, what is the TE-mode wave impedance Z_TE?",
+    "answer": "Z_TE = η0 / √(1−(f_c/f)²) = 376.73 / 0.7656 = 492 Ω.",
+    "ref": "Pozar 4th ed., Ch. 3, wave impedance"
+  },
+  {
+    "id": "p03-06",
+    "module": "03-lines-and-waveguides",
+    "topic": "phase and group velocity",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "In air-filled waveguide above cutoff, how do v_p and v_g compare to c, and what is v_p v_g?",
+    "answer": "v_p = ω/β = c / √(1−(f_c/f)²) is greater than c; v_g = c²/v_p is less than c. Their product is c². Near cutoff, v_g → 0 and v_p → ∞, which is why a band edge is a bad place to operate a WR3.4 extender.",
+    "ref": "Pozar 4th ed., Ch. 3"
+  },
+  {
+    "id": "p03-07",
+    "module": "03-lines-and-waveguides",
+    "topic": "coax Z0",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "A 50 Ω coax is filled with ε_r = 2.30. Using η0 = 376.73 Ω and Z0 = (η0/(2π√ε_r)) ln(b/a), what is the required b/a ratio?",
+    "answer": "ln(b/a) = 50 × 2π × √2.30 / 376.73 = 1.265, so b/a = e^{1.265} = 3.54.",
+    "ref": "Pozar 4th ed., Ch. 3, coaxial line"
+  },
+  {
+    "id": "p03-08",
+    "module": "03-lines-and-waveguides",
+    "topic": "microstrip synthesis",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "Why is a microstrip line only quasi-TEM, and what is ε_eff relative to 1 and ε_r?",
+    "answer": "Part of the field is in the substrate and part is in air, so there is a weak longitudinal field and a frequency-dependent effective permittivity. ε_eff always sits between 1 and ε_r (approaching ε_r for very wide strips). Phase velocity is c/√ε_eff, not c/√ε_r.",
+    "ref": "Pozar 4th ed., Ch. 3, microstrip"
+  },
+  {
+    "id": "p04-01",
+    "module": "04-network-analysis-sparams",
+    "topic": "S11 definition",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "Define S11 in words, including the termination condition on the other ports.",
+    "answer": "S11 is the ratio of the outgoing wave b1 to the incident wave a1 at port 1, with every other port terminated in a matched load so that a_k = 0 for k ≠ 1. For a one-port it is just Γ = (Z_L − Z0)/(Z_L + Z0).",
+    "ref": "Pozar 4th ed., §4.3"
+  },
+  {
+    "id": "p04-02",
+    "module": "04-network-analysis-sparams",
+    "topic": "Gamma_in of a two-port",
+    "difficulty": 2,
+    "type": "derive",
+    "question": "A two-port with scattering matrix S is terminated at port 2 by a load Γ_L. Write Γ_in at port 1, and state when Γ_in equals S11.",
+    "answer": "Γ_in = S11 + S12 S21 Γ_L / (1 − S22 Γ_L). This equals S11 when Γ_L = 0 (port 2 matched) or when S12 S21 = 0 (e.g. a unilateral device with S12 = 0).",
+    "ref": "Pozar 4th ed., §4.3"
+  },
+  {
+    "id": "p04-03",
+    "module": "04-network-analysis-sparams",
+    "topic": "Gamma_in numerical",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "A reciprocal two-port has S11 = S22 = 0.20 and S21 = S12 = 0.90, all real, referred to 50 Ω. Port 2 is terminated with Γ_L = 0.50. Compute Γ_in.",
+    "answer": "Γ_in = 0.20 + (0.90×0.90×0.50)/(1 − 0.20×0.50) = 0.20 + 0.405/0.90 = 0.650.",
+    "ref": "Pozar 4th ed., §4.3"
+  },
+  {
+    "id": "p04-04",
+    "module": "04-network-analysis-sparams",
+    "topic": "unitarity",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "For the same two-port (S11 = 0.20, S21 = 0.90), is the device lossless? Compute |S11|² + |S21|² and interpret the deficit.",
+    "answer": "|S11|^2 + |S21|^2 = 0.04 + 0.81 = 0.85, which is not 1, so the network is lossy. With port 2 matched, 0.15 (15%) of the incident power is dissipated or radiated.",
+    "ref": "Pozar 4th ed., §4.3 (lossless / unitary S)"
+  },
+  {
+    "id": "p04-05",
+    "module": "04-network-analysis-sparams",
+    "topic": "reciprocity and losslessness",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "What does reciprocity say about S, and what does losslessness say about S? Name one component that violates reciprocity.",
+    "answer": "A reciprocal network (isotropic materials, consistent port normalization) has a symmetric S: S_ij = S_ji. A lossless network has a unitary S: S†S = I. Magnetized ferrites (isolators, circulators) are the standard nonreciprocal exception.",
+    "ref": "Pozar 4th ed., §4.3"
+  },
+  {
+    "id": "p04-06",
+    "module": "04-network-analysis-sparams",
+    "topic": "return loss / S11 dB",
+    "difficulty": 1,
+    "type": "calc",
+    "question": "A one-port measurement gives S11 = −10.0 dB. What is |Γ|, the reflected-power fraction, the accepted-power fraction, and the VSWR?",
+    "answer": "|Γ| = 10^(−10/20) = 0.3162. |Γ|² = 0.100. Accepted fraction = 0.900. VSWR = (1.3162)/(0.6838) = 1.925.",
+    "ref": "Pozar 4th ed., §4.3 and Ch. 2"
+  },
+  {
+    "id": "p04-07",
+    "module": "04-network-analysis-sparams",
+    "topic": "ABCD vs S",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "When is the ABCD (chain) matrix more convenient than S, and when is S the matrix you actually measure?",
+    "answer": "ABCD is convenient for cascading two-ports (multiply the matrices) and for embedding series/shunt elements. S is what a VNA measures, is naturally power-normalized, and stays well-behaved when Z or Y would have open- or short-circuit poles. In practice you measure S and convert if you need to cascade in Z0-inconsistent fixtures.",
+    "ref": "Pozar 4th ed., Ch. 4"
+  },
+  {
+    "id": "p04-08",
+    "module": "04-network-analysis-sparams",
+    "topic": "lossless two-port identities",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "For a lossless two-port, what can you say about |S11| vs |S22| and about |S21| vs |S12|? Write the power-conservation statement at port 1.",
+    "answer": "Unitarity implies |S11| = |S22| and |S21| = |S12|, and |S11|² + |S21|² = 1 (similarly at port 2). A measured passive waveguide through with |S11|² + |S21|² noticeably greater than 1 is a calibration problem.",
+    "ref": "Pozar 4th ed., §4.3"
+  },
+  {
+    "id": "p04-09",
+    "module": "04-network-analysis-sparams",
+    "topic": "reference impedance",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "Why must you be careful when one port of a two-port is a WR3.4 flange and the other is a 50 Ω on-wafer probe?",
+    "answer": "S is defined with respect to a chosen reference impedance (and a chosen mode) at each port. A waveguide cal refers port 1 to the TE10 wave / characteristic impedance at the flange; a probe cal refers port 2 to 50 Ω at the probe tips. Converting, cascading, or quoting Γ_in requires a consistent renormalization; just multiplying raw S matrices from two different cals is wrong.",
+    "ref": "Pozar 4th ed., §4.3"
+  },
+  {
+    "id": "p04-10",
+    "module": "04-network-analysis-sparams",
+    "topic": "insertion loss",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "A matched, reciprocal attenuator has S21 = S12 = 0.501 (linear) and S11 = S22 = 0. Compute the insertion loss in dB and check unitarity.",
+    "answer": "IL = −20 log10(0.501) = 6.00 dB. |S11|² + |S21|² = 0.251, far from 1: the missing power is dissipated in the attenuator (as designed).",
+    "ref": "Pozar 4th ed., §4.3"
+  },
+  {
+    "id": "p05-01",
+    "module": "05-matching-tuning",
+    "topic": "quarter-wave transformer",
+    "difficulty": 1,
+    "type": "calc",
+    "question": "Design a single-section quarter-wave transformer that matches 200 Ω to 50 Ω. What is Z1, and at 10.00 GHz on a TEM line with v_p = c = 3.00×10^8 m/s, what is the physical length?",
+    "answer": "Z1 = √(50×200) = 100 Ω. ℓ = c/(4f) = 7.50 mm.",
+    "ref": "Pozar 4th ed., §5.4"
+  },
+  {
+    "id": "p05-02",
+    "module": "05-matching-tuning",
+    "topic": "quarter-wave off-frequency",
+    "difficulty": 3,
+    "type": "calc",
+    "question": "The 100 Ω, 7.50 mm transformer of the previous item is used at 11.00 GHz (still v_p = c). Compute Z_in at the 50 Ω port and |Γ| referred to 50 Ω, plus the return loss in dB.",
+    "answer": "Electrical length is 99.0°. Z_in = 50.93 + j11.80 Ω. Γ = 0.023 + j0.114, |Γ| = 0.117, RL = 18.7 dB.",
+    "ref": "Pozar 4th ed., §5.4"
+  },
+  {
+    "id": "p05-03",
+    "module": "05-matching-tuning",
+    "topic": "L-section",
+    "difficulty": 3,
+    "type": "calc",
+    "question": "Match a real 200 Ω load to 50 Ω at 10.00 GHz with a shunt capacitor followed by a series inductor. Find B, C, the leftover reactance, and L.",
+    "answer": "B = +0.00866 S, so C = B/omega = 0.138 pF. The load-plus-shunt looks like 50 - j86.6 ohm, i.e. leftover X = -86.6 ohm, cancelled by L = 86.6/omega = 1.38 nH.",
+    "ref": "Pozar 4th ed., §5.1 (L-section matching)"
+  },
+  {
+    "id": "p05-04",
+    "module": "05-matching-tuning",
+    "topic": "Fano / bandwidth",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "Why can a lossless matching network not produce an arbitrarily broadband perfect match to a high-Q load?",
+    "answer": "Fano's limitation (a Bode–Fano integral constraint) bounds how small |Γ| can be, over how wide a band, given the load's reactive energy storage. A high-Q load stores a lot of energy per cycle, so a deep match is necessarily narrow. You can spend more matching elements to approach the bound, but you cannot beat it with a lossless network.",
+    "ref": "Pozar 4th ed., Ch. 5 (matching limitations)"
+  },
+  {
+    "id": "p05-05",
+    "module": "05-matching-tuning",
+    "topic": "single-stub idea",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "In one paragraph, how does a single-stub tuner match a complex load to Z0?",
+    "answer": "A length of line (the 'distance to the stub') walks Z_L along a constant-|Γ| (lossless) arc until the input admittance sits on the 1 + jb circle (normalized). A shunt stub is then cut to present −jb and cancel the leftover susceptance, leaving 1 + j0, i.e. Z0. A shorted stub is preferred in waveguide; an open stub is easier on microstrip.",
+    "ref": "Pozar 4th ed., §5.2"
+  },
+  {
+    "id": "p05-06",
+    "module": "05-matching-tuning",
+    "topic": "binomial vs Chebyshev transformer",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "What is the qualitative difference between a binomial (maximally flat) and a Chebyshev multi-section quarter-wave transformer?",
+    "answer": "Binomial: flattest possible |Γ| near the design frequency, slower roll-off, narrower useful band for a given number of sections. Chebyshev: equal-ripple |Γ| in a prescribed passband, which for a given allowed |Γ|_max and number of sections gives a wider band, at the cost of passband ripple in Γ.",
+    "ref": "Pozar 4th ed., §5.5"
+  },
+  {
+    "id": "p05-07",
+    "module": "05-matching-tuning",
+    "topic": "waveguide backshort travel",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "At 270 GHz in WR-3.4, λ_g = 1.451 mm. How far must a movable short travel to change the stub phase by 180° (a half-wave of guide)?",
+    "answer": "A 180° change in 2βℓ for a reflection, or 180° of stub electrical length? For the short's *electrical length* to change by 180°, it must travel λ_g/2 = 0.726 mm. (If the question is read as a round-trip phase of 180° on Γ, that is λ_g/4 = 0.363 mm.) The usual 'half-turn on the Smith chart' travel is λ_g/4; a full 180° of stub length is λ_g/2. Here we want a full reversal of a shorted-stub length of 180°, i.e. 0.726 mm.",
+    "ref": "Pozar 4th ed., Ch. 5 (stub tuners) and Ch. 3"
+  },
+  {
+    "id": "p05-08",
+    "module": "05-matching-tuning",
+    "topic": "match vs noise/power",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "When should you *not* match a device to 50 Ω even though you could?",
+    "answer": "When the goal is a prescribed Γ, not a zero Γ: a low-noise amplifier wants Γ_S ≈ Γ_opt, a power amplifier wants a load-pull impedance, and some sensors want a deliberate mismatch. A pretty S11 is the right goal only when available-power transfer (or a quiet 50 Ω system) is actually the spec.",
+    "ref": "Pozar 4th ed., Ch. 5; see also Ch. 10–11"
+  },
+  {
+    "id": "p06-01",
+    "module": "06-resonators",
+    "topic": "Q definitions",
+    "difficulty": 1,
+    "type": "derive",
+    "question": "Write the definitions of Q0, QL, and Qe, and the coupling factor κ, and relate QL to the 3 dB bandwidth.",
+    "answer": "Q0 = ω0 U / P_loss (unloaded). 1/QL = 1/Q0 + 1/Qe, with Qe the external (coupling) Q. κ = Q0/Qe. The loaded 3 dB bandwidth is f0/QL (and f0/Q0 for an isolated resonator).",
+    "ref": "Pozar 4th ed., Ch. 6"
+  },
+  {
+    "id": "p06-02",
+    "module": "06-resonators",
+    "topic": "series RLC",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "A series RLC resonates at 10.00 GHz with C = 0.500 pF and unloaded Q0 = 80. Find L, R, and the unloaded 3 dB bandwidth.",
+    "answer": "L = 1/(ω0² C) = 0.507 nH. R = ω0 L / Q0 = 0.398 Ω. Δf = f0/Q0 = 125 MHz.",
+    "ref": "Pozar 4th ed., Ch. 6, lumped resonators"
+  },
+  {
+    "id": "p06-03",
+    "module": "06-resonators",
+    "topic": "coupling",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "A one-port resonator has Q0 = 80 and QL = 40. Find Qe, κ, and |S11| at resonance. What coupling regime is this?",
+    "answer": "1/Qe = 1/40 − 1/80 ⇒ Qe = 80, κ = 1, |S11(f0)| = 0. This is critical coupling: all accepted power is dissipated in the resonator.",
+    "ref": "Pozar 4th ed., Ch. 6, coupling"
+  },
+  {
+    "id": "p06-04",
+    "module": "06-resonators",
+    "topic": "undercoupled S11",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "Same Q0 = 80, but now Qe = 160. Find κ, QL, and |S11| at resonance in linear and in dB.",
+    "answer": "κ = 80/160 = 0.50 (undercoupled). QL = 53.33. |S11| = |κ−1|/(κ+1) = 1/3 = 0.333 = −9.54 dB.",
+    "ref": "Pozar 4th ed., Ch. 6"
+  },
+  {
+    "id": "p06-05",
+    "module": "06-resonators",
+    "topic": "TE101 cavity",
+    "difficulty": 3,
+    "type": "calc",
+    "question": "An air-filled WR-90 cavity has a = 22.86 mm and b = 10.16 mm. What length d puts the TE101 mode at 10.00 GHz? Use c = 3.00×10^8 m/s.",
+    "answer": "f = (c/2) √((1/a)² + (1/d)²) ⇒ d = 19.88 mm.",
+    "ref": "Pozar 4th ed., Ch. 6, rectangular cavities"
+  },
+  {
+    "id": "p06-06",
+    "module": "06-resonators",
+    "topic": "line resonators",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "At what lengths is an open-circuited lossless TEM line resonant? A short-circuited one? Why does a printed open half-wave usually have a lower Q than a metal cavity?",
+    "answer": "Open line: ℓ = n λ/2. Shorted line: odd multiples of λ/4. A printed open end radiates and the conductors/dielectric are lossier relative to the stored energy than a sizable metal cavity, so Q0 is lower.",
+    "ref": "Pozar 4th ed., Ch. 6, transmission-line resonators"
+  },
+  {
+    "id": "p06-07",
+    "module": "06-resonators",
+    "topic": "Smith chart loop",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "What does a one-port resonator look like on a Smith chart as you sweep frequency, and how do you recognize critical coupling?",
+    "answer": "It traces a tight loop (a 'bead') as frequency passes through resonance. At critical coupling the loop passes through the chart center (S11 = 0 at f0). Undercoupled loops miss the center and stay toward the open or short side; overcoupled loops enclose the center.",
+    "ref": "Pozar 4th ed., Ch. 6"
+  },
+  {
+    "id": "p07-01",
+    "module": "07-power-dividers-couplers",
+    "topic": "three-port limitation",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "Why can a three-port network not be simultaneously matched at all ports, reciprocal, and lossless?",
+    "answer": "A 3×3 unitary symmetric S-matrix cannot have zeros on the diagonal (matched ports) while remaining consistent: unitarity plus S = S^T over-constrains the rows. Something has to give — usually you add a resistor (Wilkinson) and give up losslessness in the odd mode, or you accept a mismatch (T-junction).",
+    "ref": "Pozar 4th ed., Ch. 7"
+  },
+  {
+    "id": "p07-02",
+    "module": "07-power-dividers-couplers",
+    "topic": "Wilkinson design",
+    "difficulty": 1,
+    "type": "calc",
+    "question": "Design an equal-split two-way Wilkinson divider for Z0 = 50 Ω. Give the arm impedance, the isolation resistor, and the arm length in wavelengths.",
+    "answer": "Z_arm = Z0 √2 = 70.71 Ω, R = 2 Z0 = 100 Ω, ℓ = λ/4.",
+    "ref": "Pozar 4th ed., Ch. 7, Wilkinson divider"
+  },
+  {
+    "id": "p07-03",
+    "module": "07-power-dividers-couplers",
+    "topic": "Wilkinson powers",
+    "difficulty": 1,
+    "type": "calc",
+    "question": "A 10.0 dBm matched source drives an ideal equal-split Wilkinson with matched 50 Ω loads on both outputs. What power is delivered to each load, in dBm?",
+    "answer": "Each output is −3.01 dB from the input, so 6.99 dBm. The isolation resistor dissipates nothing in this even-mode case.",
+    "ref": "Pozar 4th ed., Ch. 7"
+  },
+  {
+    "id": "p07-04",
+    "module": "07-power-dividers-couplers",
+    "topic": "branch-line",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "Design a 50 Ω branch-line (quadrature) hybrid. Give the series-arm and shunt-arm impedances. If ε_eff = 3.00 and f = 10.00 GHz, what is λ_g/4? Use c = 3.00×10^8 m/s.",
+    "answer": "Z_series = Z0/√2 = 35.36 Ω, Z_shunt = Z0 = 50 Ω. λ_g = c/(f √ε_eff) = 17.32 mm, so λ_g/4 = 4.33 mm.",
+    "ref": "Pozar 4th ed., Ch. 7, branch-line hybrid"
+  },
+  {
+    "id": "p07-05",
+    "module": "07-power-dividers-couplers",
+    "topic": "coupling directivity isolation",
+    "difficulty": 1,
+    "type": "derive",
+    "question": "Define coupling C, isolation I, and directivity D for a four-port directional coupler, in dB, in terms of S-parameters (port 1 input, port 2 through, port 3 coupled, port 4 isolated).",
+    "answer": "C = −20 log10 |S31|, I = −20 log10 |S41|, D = I − C = −20 log10 |S41/S31|. High directivity means the isolated port is much quieter than the coupled port.",
+    "ref": "Pozar 4th ed., Ch. 7"
+  },
+  {
+    "id": "p07-06",
+    "module": "07-power-dividers-couplers",
+    "topic": "directivity number",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "A coupler is specified as 10.0 dB coupling and 35.0 dB isolation. What is the directivity in dB, and what are |S31| and |S41|?",
+    "answer": "D = 35 − 10 = 25.0 dB. |S31| = 10^(−10/20) = 0.3162, |S41| = 10^(−35/20) = 0.01778.",
+    "ref": "Pozar 4th ed., Ch. 7"
+  },
+  {
+    "id": "p07-07",
+    "module": "07-power-dividers-couplers",
+    "topic": "even-odd Wilkinson",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "In a Wilkinson divider, when does the isolation resistor dissipate power, and when does it not?",
+    "answer": "In even mode (equal, in-phase voltages at the two outputs) there is no voltage across the resistor, so it dissipates nothing and the network behaves as a lossless splitter. In odd mode (out-of-phase outputs, or a mismatch on only one port) the resistor absorbs the difference, which is exactly how isolation is produced.",
+    "ref": "Pozar 4th ed., Ch. 7"
+  },
+  {
+    "id": "p08-01",
+    "module": "08-filters",
+    "topic": "Butterworth vs Chebyshev",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "Qualitatively, what does a Butterworth low-pass |S21|(f) look like compared with a Chebyshev low-pass of the same order?",
+    "answer": "Butterworth is maximally flat in the passband (no ripple) and has a gentler transition into the stopband. Chebyshev has equal-ripple passband response, a sharper transition for the same N, and usually worse group-delay variation. The Chebyshev passband return loss is only as good as the ripple allows.",
+    "ref": "Pozar 4th ed., Ch. 8, insertion-loss method"
+  },
+  {
+    "id": "p08-02",
+    "module": "08-filters",
+    "topic": "prototype scaling",
+    "difficulty": 1,
+    "type": "derive",
+    "question": "A low-pass prototype has element values g_L (series, normalized to 1 ohm and omega_c' = 1) and g_C (shunt). Write the impedance- and frequency-scaled L and C for a cutoff omega_c and system Z0.",
+    "answer": "L = g_L Z0 / omega_c,  C = g_C / (Z0 omega_c).",
+    "ref": "Pozar 4th ed., Ch. 8, prototype scaling"
+  },
+  {
+    "id": "p08-03",
+    "module": "08-filters",
+    "topic": "Butterworth N=3 design",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "Design a 3rd-order Butterworth low-pass, 50 ohm, cutoff 1.00 GHz (3 dB), starting with a series L. Prototype g1 = 1, g2 = 2, g3 = 1. Give L1, C2, and L3.",
+    "answer": "omega_c = 2 pi x 10^9. L1 = L3 = 50/omega_c = 7.958 nH. C2 = 2/(50 omega_c) = 6.366 pF.",
+    "ref": "Pozar 4th ed., Ch. 8, Butterworth prototype"
+  },
+  {
+    "id": "p08-04",
+    "module": "08-filters",
+    "topic": "Butterworth stopband",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "For that 3rd-order Butterworth, the power-loss ratio is P_LR = 1 + Omega^{2N} with N = 3. What is |S21| in dB at 2.00 GHz (one octave above cutoff)?",
+    "answer": "Omega = 2, Omega^6 = 64, P_LR = 65, |S21| = -10 log10(65) = -18.1 dB.",
+    "ref": "Pozar 4th ed., Ch. 8, Butterworth response"
+  },
+  {
+    "id": "p08-05",
+    "module": "08-filters",
+    "topic": "LP to BP map",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "How are prototype L and C transformed in a low-pass-to-band-pass mapping, and why does a narrow bandpass need high-Q resonators?",
+    "answer": "Each series L becomes a series LC that resonates at omega_0; each shunt C becomes a parallel LC at omega_0. The L/C ratios are set by the fractional bandwidth Delta. Small Delta forces large reactances (high stored energy relative to dissipation into the load), i.e. high-Q resonators. That is why a 1% cavity filter cannot be made of low-Q lumped parts.",
+    "ref": "Pozar 4th ed., Ch. 8, frequency transformations"
+  },
+  {
+    "id": "p08-06",
+    "module": "08-filters",
+    "topic": "spurious passbands",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "Why do distributed microwave filters typically show extra passbands, and to what frequency should you at least sweep a measured filter?",
+    "answer": "Richards' transformation and lambda/4 coupled-line equivalences are exact at one frequency and periodic in frequency (often repeating or imaging near 2 f0 or 3 f0). Always sweep to at least 3 f0, and do not be surprised by a spurious passband there.",
+    "ref": "Pozar 4th ed., Ch. 8, distributed filters"
+  },
+  {
+    "id": "p08-07",
+    "module": "08-filters",
+    "topic": "THz filter practice",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "At WR3.4 frequencies, what does a typical bandpass look like physically, and what insertion-loss expectation is realistic compared with 2 GHz?",
+    "answer": "Usually a waveguide iris chain, a gold-plated cavity block, or a quasi-optical mesh / silicon FSS -- not an 0402 lumped ladder. A mid-band insertion loss of a couple of dB, which would be embarrassing at 2 GHz, is often a victory at 270 GHz because of conductor loss and flange leakage.",
+    "ref": "Pozar 4th ed., Ch. 8; THz practice"
+  },
+  {
+    "id": "p09-01",
+    "module": "09-ferrites-optional",
+    "topic": "nonreciprocity origin",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "Why is a magnetized ferrite a nonreciprocal medium?",
+    "answer": "A DC bias field makes the magnetic moments precess, so a small RF magnetic field sees an antisymmetric permeability tensor rather than a scalar mu. The antisymmetric off-diagonal terms break S = S^T (while a lossless ferrite can still be unitary). Faraday rotation that follows the bias field, not the direction of travel, is the wave picture of the same fact.",
+    "ref": "Pozar 4th ed., Ch. 9, permeability tensor"
+  },
+  {
+    "id": "p09-02",
+    "module": "09-ferrites-optional",
+    "topic": "circulator S",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "Write an ideal circulator S-matrix (the 1 to 2, 2 to 3, 3 to 1 convention) and say how an isolator is obtained from a circulator.",
+    "answer": "S = [[0, 0, 1], [1, 0, 0], [0, 1, 0]] (a common phase convention; overall phase factors are allowed). An isolator is a circulator with the third port internally terminated, or a dedicated two-port Faraday / resonance / field-displacement structure. Ideal isolator: S21 = 1, S12 = 0, S11 = S22 = 0.",
+    "ref": "Pozar 4th ed., Ch. 9, circulators and isolators"
+  },
+  {
+    "id": "p09-03",
+    "module": "09-ferrites-optional",
+    "topic": "isolator specs",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "An isolator is specified as 20 dB isolation, 0.40 dB insertion loss, and 1.25:1 VSWR at both ports. Compute |S21|, |S12|, |Gamma|, and the return loss in dB.",
+    "answer": "|S21| = 10^(-0.40/20) = 0.955. |S12| = 10^(-20/20) = 0.100. |Gamma| = (1.25-1)/(1.25+1) = 0.111. RL = 19.1 dB.",
+    "ref": "Pozar 4th ed., Ch. 9"
+  },
+  {
+    "id": "p09-04",
+    "module": "09-ferrites-optional",
+    "topic": "why an isolator",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "Give one good reason to put an isolator on a VNA source or in front of a highly reflective filter, and one reason ferrite isolators are scarce at 270 GHz.",
+    "answer": "An isolator reduces load-pull of the source (or of an extender LO) and soaks up the stopband reflection of a high-Q filter so the source stays well behaved. Ferrite saturation magnetization and FMR frequencies, plus loss, make true WR3.4 isolators uncommon; many 220-330 GHz benches use a coupler plus a load, or just live with the mismatch.",
+    "ref": "Pozar 4th ed., Ch. 9"
+  },
+  {
+    "id": "p09-05",
+    "module": "09-ferrites-optional",
+    "topic": "unitarity of an isolator",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "Should a good isolator satisfy |S11|^2 + |S21|^2 = 1? What check is actually useful?",
+    "answer": "No: a reverse-going wave is supposed to be absorbed, so the S-matrix is not unitary in the lossless sense. A useful check is that the input remains reasonably matched even when the output is shorted, because the reflected wave is terminated inside the isolator rather than re-reflected toward the source.",
+    "ref": "Pozar 4th ed., Ch. 9"
+  },
+  {
+    "id": "p10-01",
+    "module": "10-noise-nonlinear",
+    "topic": "kT0",
+    "difficulty": 1,
+    "type": "calc",
+    "question": "Using k = 1.381e-23 J/K and T0 = 290 K, compute kT0 in dBm/Hz, and the available thermal noise power in 1.00 GHz of bandwidth, in dBm.",
+    "answer": "kT0 = -174.0 dBm/Hz (more precisely -173.98 dBm/Hz). In 1.00 GHz, add 90.00 dB, so -84.0 dBm.",
+    "ref": "Pozar 4th ed., Ch. 10, thermal noise"
+  },
+  {
+    "id": "p10-02",
+    "module": "10-noise-nonlinear",
+    "topic": "F and Te",
+    "difficulty": 1,
+    "type": "derive",
+    "question": "Write the relationship among noise factor F, noise figure NF, and excess noise temperature Te, for a two-port referred to T0 = 290 K.",
+    "answer": "NF = 10 log10 F, with F = (T0 + Te)/T0, so Te = T0 (F - 1) and F = 1 + Te/T0. F is always >= 1 for a passive physical two-port at T0.",
+    "ref": "Pozar 4th ed., Ch. 10"
+  },
+  {
+    "id": "p10-03",
+    "module": "10-noise-nonlinear",
+    "topic": "Friis cascade",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "Stage 1: NF = 1.50 dB, gain = 12.0 dB. Stage 2: NF = 4.00 dB. Compute the cascade noise figure in dB.",
+    "answer": "F1 = 1.413, G1 = 15.85, F2 = 2.512. F = 1.413 + (2.512-1)/15.85 = 1.508, NF = 1.78 dB.",
+    "ref": "Pozar 4th ed., Ch. 10, Friis formula"
+  },
+  {
+    "id": "p10-04",
+    "module": "10-noise-nonlinear",
+    "topic": "lossy line in front",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "A 3.00 dB lossy cable at physical temperature T0 sits in front of an LNA with NF = 1.50 dB. What is the cascade noise figure in dB? (The LNA gain is large enough that later stages do not matter.)",
+    "answer": "A passive loss L = 2.000 at T0 has F_cable = 2.000 and G_cable = 0.500. F_LNA = 1.413. F = 2.000 + (1.413-1)/0.500 = 2.826, NF = 4.51 dB. The cable costs you its 3 dB plus a little more because the LNA noise is also referred through the loss.",
+    "ref": "Pozar 4th ed., Ch. 10, Friis formula"
+  },
+  {
+    "id": "p10-05",
+    "module": "10-noise-nonlinear",
+    "topic": "two-tone IP3",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "An amplifier has 15.0 dB of small-signal gain. Two tones at Pin = -10.0 dBm each produce fundamentals at +5.0 dBm and IM3 products at -40.0 dBm at the output. Compute OIP3 and IIP3 in dBm.",
+    "answer": "Delta = 5.0 - (-40.0) = 45.0 dB. OIP3 = 5.0 + 45/2 = 27.5 dBm. IIP3 = -10.0 + 22.5 = 12.5 dBm (also OIP3 - gain = 27.5 - 15.0 = 12.5 dBm).",
+    "ref": "Pozar 4th ed., Ch. 10, intermodulation / IP3"
+  },
+  {
+    "id": "p10-06",
+    "module": "10-noise-nonlinear",
+    "topic": "P1dB vs IP3",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "Define P_1dB, and state the usual rule-of-thumb relationship between OIP3 and the output 1 dB compression point. Is it a law?",
+    "answer": "P_1dB is the input (or output) power at which the gain has fallen 1 dB below the small-signal value. A common rule of thumb is OIP3 ~ P_1dB + 10 dB, but it is a rule of thumb, not a law; measure both when they matter.",
+    "ref": "Pozar 4th ed., Ch. 10, compression and intercepts"
+  },
+  {
+    "id": "p10-07",
+    "module": "10-noise-nonlinear",
+    "topic": "passive F = L",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "What is the noise factor of a purely lossy passive two-port at physical temperature T0, and why does a 3 dB waveguide run in front of a 270 GHz mixer 'become' the system NF?",
+    "answer": "F = L = 1/G for a passive network at T0. A 3 dB run therefore contributes 3 dB of NF, and if it is first (or if the following mixer is itself a 9 dB-loss 'first stage'), Friis says that front-end loss is essentially the whole system noise figure.",
+    "ref": "Pozar 4th ed., Ch. 10"
+  },
+  {
+    "id": "p10-08",
+    "module": "10-noise-nonlinear",
+    "topic": "IM3 slope",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "On a dB-in / dB-out plot, what are the slopes of the fundamental and the IM3 product in the weakly nonlinear region, and how do you tell you have left that region?",
+    "answer": "The fundamental tracks 1 dB/dB; the IM3 product tracks 3 dB/dB, so the gap Delta shrinks 2 dB for every 1 dB of extra drive. If Delta does not shrink at that rate, you are no longer on the cubic slope (compression, higher-order terms, or a measurement artifact).",
+    "ref": "Pozar 4th ed., Ch. 10"
+  },
+  {
+    "id": "p11-01",
+    "module": "11-active-devices-amplifiers",
+    "topic": "transducer gain",
+    "difficulty": 2,
+    "type": "derive",
+    "question": "Write the transducer power gain GT of a two-port in terms of S, Gamma_S, and Gamma_L (or Gamma_out), and reduce it to the unilateral matched case.",
+    "answer": "GT = [(1-|Gamma_S|^2)/|1 - S11 Gamma_S|^2] * |S21|^2 * [(1-|Gamma_L|^2)/|1 - Gamma_out Gamma_L|^2]. If S12 = 0 and Gamma_S = Gamma_L = 0, this collapses to GT = |S21|^2.",
+    "ref": "Pozar 4th ed., Ch. 11, gain definitions"
+  },
+  {
+    "id": "p11-02",
+    "module": "11-active-devices-amplifiers",
+    "topic": "unilateral |S21|^2",
+    "difficulty": 1,
+    "type": "calc",
+    "question": "A transistor has |S21| = 4.00 in a 50 ohm system. What is the unilateral matched transducer gain, as a linear ratio and in dB?",
+    "answer": "|S21|^2 = 16.00 = 12.04 dB.",
+    "ref": "Pozar 4th ed., Ch. 11"
+  },
+  {
+    "id": "p11-03",
+    "module": "11-active-devices-amplifiers",
+    "topic": "Rollett K",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "State Rollett's unconditional-stability test, including the role of Delta = S11 S22 - S12 S21. What is the equivalent mu-test?",
+    "answer": "Unconditionally stable if K > 1 and |Delta| < 1, where K = (1 - |S11|^2 - |S22|^2 + |Delta|^2) / (2 |S12 S21|). Equivalently, Edwards' mu > 1 (a single parameter). If the test fails, the device is only conditionally stable and you must stay outside the unstable regions of the source and load planes.",
+    "ref": "Pozar 4th ed., Ch. 11, stability"
+  },
+  {
+    "id": "p11-04",
+    "module": "11-active-devices-amplifiers",
+    "topic": "K-Delta numerical",
+    "difficulty": 3,
+    "type": "calc",
+    "question": "A 10 GHz typified transistor has S11 = 0.70 angle -40 deg, S21 = 4.00 angle 70 deg, S12 = 0.08 angle 30 deg, S22 = 0.55 angle -20 deg. Compute |Delta| and Rollett K, and say whether the device is unconditionally stable.",
+    "answer": "Delta = S11 S22 - S12 S21 = 0.248 - j0.649, |Delta| = 0.694. K = 1.078. Since K > 1 and |Delta| < 1, the device is unconditionally stable.",
+    "ref": "Pozar 4th ed., Ch. 11, stability"
+  },
+  {
+    "id": "p11-05",
+    "module": "11-active-devices-amplifiers",
+    "topic": "MAG",
+    "difficulty": 3,
+    "type": "calc",
+    "question": "Using K = 1.078, |S21| = 4.00, and |S12| = 0.08 from the previous item, compute the maximum available gain as a linear ratio and in dB.",
+    "answer": "MAG = (|S21|/|S12|) * (K - sqrt(K^2 - 1)) = 50 * (1.078 - 0.400) = 33.80 = 15.29 dB.",
+    "ref": "Pozar 4th ed., Ch. 11, MAG"
+  },
+  {
+    "id": "p11-06",
+    "module": "11-active-devices-amplifiers",
+    "topic": "noise vs power match",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "Why is the source match of a low-noise amplifier generally not the conjugate of S11, and what does a power amplifier want instead of a conjugate load?",
+    "answer": "F_min is achieved at a particular Gamma_opt that is a device noise parameter, not S11*. You present Gamma_S ~ Gamma_opt and then match the output as best you can. A power amplifier is aimed at a load-pull contour (often a lower real impedance than the conjugate match) chosen for P_1dB or PAE, not for MAG.",
+    "ref": "Pozar 4th ed., Ch. 11 (and Ch. 10 noise parameters)"
+  },
+  {
+    "id": "p11-07",
+    "module": "11-active-devices-amplifiers",
+    "topic": "MSG",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "If K < 1, the MAG formula is meaningless. What figure of merit is used instead, and what is its expression?",
+    "answer": "The maximum stable gain, MSG = |S21|/|S12|, which is the gain when the device has been resistively stabilized just to K = 1. You cannot apply the MAG expression for K < 1 because there is no simultaneous conjugate match in the passive-termination plane.",
+    "ref": "Pozar 4th ed., Ch. 11"
+  },
+  {
+    "id": "p11-08",
+    "module": "11-active-devices-amplifiers",
+    "topic": "VNA amplifier measurement",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "What two practical checks should you make before trusting a VNA S21 of a mm-wave or THz amplifier?",
+    "answer": "Confirm you are below P_1dB (the VNA's default port power, especially out of a WR3.4 extender, may already compress the DUT), and confirm |S11| and |S22| never exceed 0 dB -- a positive return gain is a warning of oscillation or a broken cal. Use pads or a coupler so the VNA receivers stay linear and the DUT does not see a badly matched receiver.",
+    "ref": "Pozar 4th ed., Ch. 11; lab practice"
+  },
+  {
+    "id": "p12-01",
+    "module": "12-oscillators-mixers",
+    "topic": "oscillation condition",
+    "difficulty": 1,
+    "type": "derive",
+    "question": "Write the one-port negative-resistance oscillation condition in terms of Gamma_in and Gamma_L, including the start-up inequality.",
+    "answer": "Steady state: Gamma_in(omega, A) * Gamma_L(omega) = 1 (magnitude and phase). At start-up, the small-signal |Gamma_in| must exceed 1/|Gamma_L| with a matching phase; as the amplitude A grows, the negative resistance compresses until equality holds.",
+    "ref": "Pozar 4th ed., Ch. 12, oscillators"
+  },
+  {
+    "id": "p12-02",
+    "module": "12-oscillators-mixers",
+    "topic": "phase noise / Leeson",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "In Leeson's picture, how does the SSB phase-noise skirt scale with offset frequency, and why does a high-Q resonator help?",
+    "answer": "Outside the resonator bandwidth the skirt falls as 1/f^2 (20 dB/decade); closer in, flicker noise plus the resonator no longer filtering can produce a 1/f^3 region. A high-Q resonator narrows the bandwidth inside which the loop (or negative-resistance port) can convert device noise into frequency noise, and raising the carrier power also lowers the skirt.",
+    "ref": "Pozar 4th ed., Ch. 12, phase noise"
+  },
+  {
+    "id": "p12-03",
+    "module": "12-oscillators-mixers",
+    "topic": "conversion loss",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "Define mixer conversion loss, and how does a passive Schottky mixer's NF typically compare with its conversion loss? Why must you know SSB vs DSB?",
+    "answer": "L_c = P_RF,avail / P_IF,delivered (usually in dB). For a well-terminated passive Schottky mixer, NF is typically close to L_c (sometimes 0.5-1 dB worse). A DSB NF can be up to 3 dB better than the SSB NF because both sidebands are accepted; datasheets must be read with that distinction in mind.",
+    "ref": "Pozar 4th ed., Ch. 12, mixers"
+  },
+  {
+    "id": "p12-04",
+    "module": "12-oscillators-mixers",
+    "topic": "mixer-first Friis",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "A passive mixer has 9.0 dB of SSB conversion loss and is followed by an IF LNA with NF = 1.50 dB and plenty of gain. Treating the mixer as a passive first stage with F = L_c, what is the cascade NF in dB?",
+    "answer": "L_c = F1 = 7.943, G1 = 1/7.943. F2 = 1.413. F = 7.943 + (1.413-1)*7.943 = 11.22, NF = 10.50 dB. The IF LNA barely helps -- Friis with a lossy first stage.",
+    "ref": "Pozar 4th ed., Ch. 12 and Ch. 10"
+  },
+  {
+    "id": "p12-05",
+    "module": "12-oscillators-mixers",
+    "topic": "preamp in front",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "Now put a 15.0 dB, 4.00 dB-NF preamp in front of the 10.50 dB mixer-plus-IF cascade of the previous item. What is the new system NF in dB?",
+    "answer": "F1 = 2.512, G1 = 31.62, F2 = 11.22. F = 2.512 + (11.22-1)/31.62 = 2.835, NF = 4.53 dB. That is the argument for a THz LNA in front of a mixer.",
+    "ref": "Pozar 4th ed., Ch. 12 and Ch. 10"
+  },
+  {
+    "id": "p12-06",
+    "module": "12-oscillators-mixers",
+    "topic": "LO leakage",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "A subharmonic mixer is pumped at +7.0 dBm and has 6.0 dB of LO-to-RF isolation. How much LO power comes out of the RF port, in dBm, and why does that matter in a reflection imager or a VNA extender?",
+    "answer": "+7.0 dBm minus 6.0 dB isolation is +1.0 dBm out of the RF port. That coherent leakage is a background in a reflection imager and is one reason a VNA extender's raw uncorrected S11 is meaningless until you calibrate.",
+    "ref": "Pozar 4th ed., Ch. 12, mixer isolation"
+  },
+  {
+    "id": "p13-01",
+    "module": "13-systems-link-budgets",
+    "topic": "Friis equation",
+    "difficulty": 1,
+    "type": "derive",
+    "question": "Write the Friis transmission equation for two polarization-matched, aligned antennas in the far field in free space, and the equivalent free-space path-loss form.",
+    "answer": "P_r = P_t G_t G_r (lambda / (4 pi R))^2. Equivalently P_r = P_t G_t G_r / L_FS with L_FS = (4 pi R / lambda)^2. In dB: P_r = P_t + G_t + G_r - 20 log10(4 pi R / lambda) - L_extra.",
+    "ref": "Pozar 4th ed., Ch. 13, Friis transmission equation"
+  },
+  {
+    "id": "p13-02",
+    "module": "13-systems-link-budgets",
+    "topic": "270 GHz path loss",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "Compute the free-space path loss in dB at 270 GHz over R = 1.00 m. Use c = 3.00e8 m/s. Then, with two 20.0 dBi antennas and P_t = 0.0 dBm, what is P_r in dBm?",
+    "answer": "lambda = 1.111 mm, L_FS = 81.07 dB. P_r = 0 + 20 + 20 - 81.07 = -41.07 dBm. Linear check: G_t G_r (lambda/(4 pi R))^2 = 7.82e-5.",
+    "ref": "Pozar 4th ed., Ch. 13"
+  },
+  {
+    "id": "p13-03",
+    "module": "13-systems-link-budgets",
+    "topic": "SNR",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "The link of the previous item is received by a system with NF = 10.50 dB (T_e = 2964 K) plus T_ant = 290 K, in B = 1.00 MHz. Using k = 1.381e-23 J/K, compute the noise floor in dBm and the SNR in dB. P_r = -41.07 dBm.",
+    "answer": "T_sys = 3254 K. k T_sys B = 4.49e-14 W = -103.5 dBm. SNR = -41.07 - (-103.5) = 62.4 dB.",
+    "ref": "Pozar 4th ed., Ch. 13, system noise and SNR"
+  },
+  {
+    "id": "p13-04",
+    "module": "13-systems-link-budgets",
+    "topic": "radiometer dT",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "For a total-power radiometer, Delta T = T_sys / sqrt(B tau). With T_sys = 3254 K, B = 1.00 GHz, and tau = 1.00 ms, what is Delta T in kelvin?",
+    "answer": "Delta T = 3254 / sqrt(1e9 * 1e-3) = 3254 / 3.162e4 = 3.25 K.",
+    "ref": "Pozar 4th ed., Ch. 13, radiometers"
+  },
+  {
+    "id": "p13-05",
+    "module": "13-systems-link-budgets",
+    "topic": "radar equation",
+    "difficulty": 3,
+    "type": "calc",
+    "question": "A monostatic radar at 270 GHz uses a 20.0 dBi antenna and P_t = 0.0 dBm. Compute P_r from a target with RCS sigma = 0.010 m^2 at R = 5.00 m. Use c = 3.00e8 m/s, and give the result in dBm.",
+    "answer": "P_r = P_t G^2 lambda^2 sigma / ((4 pi)^3 R^4) = 9.95e-14 W = -100.0 dBm.",
+    "ref": "Pozar 4th ed., Ch. 13, radar equation"
+  },
+  {
+    "id": "p13-06",
+    "module": "13-systems-link-budgets",
+    "topic": "far-field criterion",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "A 10.0 cm aperture is used at 270 GHz (c = 3.00e8 m/s). What is the far-field distance 2 D^2 / lambda, in meters? Is a 1.00 m bench path in the far field?",
+    "answer": "lambda = 1.111 mm, 2 D^2 / lambda = 2*(0.10)^2 / 1.111e-3 = 18.0 m. A 1.00 m bench path is not in the far field; Friis is only a bound there.",
+    "ref": "Pozar 4th ed., Ch. 13 (and Balanis Ch. 2)"
+  },
+  {
+    "id": "p13-07",
+    "module": "13-systems-link-budgets",
+    "topic": "R^4 scaling",
+    "difficulty": 1,
+    "type": "calc",
+    "question": "If the monostatic radar return at 5.00 m is -100.0 dBm, what is it at 10.00 m, all else equal?",
+    "answer": "R^4 costs a factor of 16 = 12.04 dB, so P_r = -112.0 dBm.",
+    "ref": "Pozar 4th ed., Ch. 13, radar equation"
+  },
+  {
+    "id": "p13-08",
+    "module": "13-systems-link-budgets",
+    "topic": "Ae identity",
+    "difficulty": 1,
+    "type": "derive",
+    "question": "Show that the Friis equation is equivalent to P_r = W * A_e,r with W the incident power density from an antenna of gain G_t, using A_e = G lambda^2 / (4 pi).",
+    "answer": "The power density at range R is W = (P_t G_t) / (4 pi R^2). The receive antenna collects P_r = W A_e,r with A_e,r = G_r lambda^2 / (4 pi). Multiply: P_r = P_t G_t G_r lambda^2 / (4 pi R)^2, which is Friis.",
+    "ref": "Pozar 4th ed., Ch. 13; Balanis Ch. 2"
+  },
+  {
+    "id": "a01-01",
+    "module": "a1-antenna-fundamentals",
+    "topic": "directivity vs gain",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "Define radiation intensity U, directivity D, and gain G, and state how radiation efficiency e_r connects D and G.",
+    "answer": "U(theta, phi) is radiated power per steradian. D = 4 pi U_max / P_rad. G = e_r D, with e_r = P_rad / P_accepted = R_r / (R_r + R_loss). Realized gain still multiplies by the mismatch factor (1 - |S11|^2).",
+    "ref": "Balanis 4th ed., Ch. 2"
+  },
+  {
+    "id": "a01-02",
+    "module": "a1-antenna-fundamentals",
+    "topic": "canonical directivities",
+    "difficulty": 1,
+    "type": "calc",
+    "question": "What is the directivity of an isotropic radiator, a short (Hertzian) dipole, and a half-wave dipole, in linear units and in dBi?",
+    "answer": "Isotropic: D = 1 = 0 dBi. Short dipole: D = 1.50 = 1.76 dBi. Half-wave dipole: D = 1.643 = 2.15 dBi.",
+    "ref": "Balanis 4th ed., Ch. 2 and Ch. 4"
+  },
+  {
+    "id": "a01-03",
+    "module": "a1-antenna-fundamentals",
+    "topic": "effective aperture",
+    "difficulty": 1,
+    "type": "derive",
+    "question": "Write the identity relating effective aperture A_e to gain G, and state the isotropic A_e.",
+    "answer": "A_e = G lambda^2 / (4 pi). For an isotropic antenna, G = 1 so A_e,iso = lambda^2 / (4 pi).",
+    "ref": "Balanis 4th ed., Ch. 2"
+  },
+  {
+    "id": "a01-04",
+    "module": "a1-antenna-fundamentals",
+    "topic": "Ae at 270 GHz",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "At 270 GHz (c = 3.00e8 m/s), what is the effective aperture of an isotropic antenna, in mm^2? Of a 20.0 dBi horn, in mm^2?",
+    "answer": "lambda = 1.111 mm. A_e,iso = lambda^2/(4 pi) = 0.0982 mm^2. A 20 dBi horn has G = 100, so A_e = 9.82 mm^2.",
+    "ref": "Balanis 4th ed., Ch. 2"
+  },
+  {
+    "id": "a01-05",
+    "module": "a1-antenna-fundamentals",
+    "topic": "mismatch loss",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "An antenna has S11 = -15.0 dB. Compute |Gamma|, the accepted-power fraction, and the mismatch loss in dB.",
+    "answer": "|Gamma| = 10^(-15/20) = 0.1778. 1 - |Gamma|^2 = 0.9684. Mismatch loss = -10 log10(0.9684) = 0.14 dB.",
+    "ref": "Balanis 4th ed., Ch. 2 (and Pozar Ch. 2)"
+  },
+  {
+    "id": "a01-06",
+    "module": "a1-antenna-fundamentals",
+    "topic": "realized gain",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "A horn has directivity 21.0 dBi, radiation efficiency e_r = 0.90, and S11 = -15.0 dB (mismatch loss 0.14 dB). Compute IEEE gain and realized gain in dBi.",
+    "answer": "e_r = 0.90 = -0.46 dB. G = 21.0 - 0.46 = 20.54 dBi. G_realized = 20.54 - 0.14 = 20.40 dBi.",
+    "ref": "Balanis 4th ed., Ch. 2"
+  },
+  {
+    "id": "a01-07",
+    "module": "a1-antenna-fundamentals",
+    "topic": "far-field criterion",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "State the usual far-field (Fraunhofer) distance for an antenna of maximum dimension D, and why it is so demanding at 270 GHz.",
+    "answer": "R >= 2 D^2 / lambda. Because lambda is only 1.111 mm at 270 GHz, even a 10 cm aperture has 2 D^2/lambda = 18 m, so most THz bench pattern work is actually near-field or Fresnel unless the aperture is a small horn or you transform a scanned near field.",
+    "ref": "Balanis 4th ed., Ch. 2"
+  },
+  {
+    "id": "a01-08",
+    "module": "a1-antenna-fundamentals",
+    "topic": "polarization mismatch",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "What is the polarization-mismatch efficiency for (a) perfectly aligned linear, (b) linear into circular, (c) opposite-sense circular?",
+    "answer": "It is |rho_w · rho_a|^2. (a) 1 (0 dB). (b) 1/2 (-3 dB). (c) 0 (complete mismatch). Crossed linear is also 0.",
+    "ref": "Balanis 4th ed., Ch. 2, polarization"
+  },
+  {
+    "id": "a02-01",
+    "module": "a2-radiation-integrals",
+    "topic": "vector potential",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "What is the magnetic vector potential A sourced by, and in the far field, which components of the potentials determine E?",
+    "answer": "A is sourced by the electric current J (the usual retarded-integral kernel mu/4pi * J exp(-jkR)/R). In the far field the radial components drop out and the transverse E is set by the transverse A (and, if magnetic currents are present, by F). Then H = R-hat × E / eta.",
+    "ref": "Balanis 4th ed., Ch. 3"
+  },
+  {
+    "id": "a02-02",
+    "module": "a2-radiation-integrals",
+    "topic": "Fraunhofer approximation",
+    "difficulty": 2,
+    "type": "derive",
+    "question": "Write the Fraunhofer (far-field) approximation for the Green's-function phase and amplitude, and state when it is legal.",
+    "answer": "exp(-jk |r - r'|)/|r - r'| ≈ exp(-jkR)/R * exp(j k r-hat · r'). Legal when R is large compared with the source size and you are outside the Fraunhofer distance 2 D^2/lambda. Inside that, keep a Fresnel (quadratic) term or integrate the exact kernel.",
+    "ref": "Balanis 4th ed., Ch. 3"
+  },
+  {
+    "id": "a02-03",
+    "module": "a2-radiation-integrals",
+    "topic": "Love equivalence",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "State Love's equivalence principle for a closed surface, and the usual form used for an aperture in a conducting screen.",
+    "answer": "The original fields outside, zero fields inside, and surface currents J_s = n-hat × H, M_s = -n-hat × E on the surface, are equivalent outside. For an aperture in a conducting screen one often takes M_s = -2 n-hat × E_a in the aperture and J_s = 0 (the image / physical-optics form). The radiation integral over that M_s is the aperture-antenna calculation.",
+    "ref": "Balanis 4th ed., Ch. 3 (equivalence) and Ch. 12"
+  },
+  {
+    "id": "a02-04",
+    "module": "a2-radiation-integrals",
+    "topic": "two-element phase",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "Two equal in-phase z-directed Hertzian elements sit at x = ± d/2 with d = lambda/2. In the xy-plane, at what angle phi from the x-axis is the pattern a null, and where is it a peak? Why?",
+    "answer": "The array phase is psi = k d cos phi = pi cos phi. At phi = 0 (along the line of elements) the two contributions are 180 deg out of phase, so a null. At phi = 90 deg they add in phase, so a peak. This is a broadside two-element array.",
+    "ref": "Balanis 4th ed., Ch. 3 and Ch. 6"
+  },
+  {
+    "id": "a02-05",
+    "module": "a2-radiation-integrals",
+    "topic": "half-wave spacing at 270 GHz",
+    "difficulty": 1,
+    "type": "calc",
+    "question": "At 270 GHz (c = 3.00e8 m/s), what is lambda/2 in millimeters? Why does that matter for two probe tips on a THz bench?",
+    "answer": "lambda/2 = 0.556 mm. Two in-phase probes that far apart already have a two-lobe pattern and cannot be treated as a single point source in a near-field scan.",
+    "ref": "Balanis 4th ed., Ch. 3"
+  },
+  {
+    "id": "a02-06",
+    "module": "a2-radiation-integrals",
+    "topic": "near-field transform",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "In one sentence, what is a planar near-field-to-far-field transform doing, in the language of this chapter?",
+    "answer": "It is a discrete radiation integral (a Fourier transform of the scanned aperture field, plus probe correction) that evaluates the Fraunhofer pattern without requiring a 2 D^2/lambda range.",
+    "ref": "Balanis 4th ed., Ch. 3 and Ch. 16"
+  },
+  {
+    "id": "a03-01",
+    "module": "a3-dipoles-monopoles",
+    "topic": "Hertzian E-field",
+    "difficulty": 2,
+    "type": "derive",
+    "question": "Write the far-field E_theta of a z-directed Hertzian dipole of current I0 and length Delta_l, and the corresponding radiation resistance in free space.",
+    "answer": "E_theta = j eta (k I0 Delta_l / 4 pi) sin(theta) exp(-jkR)/R. R_r = 80 pi^2 (Delta_l / lambda)^2 ohms (using eta = eta0).",
+    "ref": "Balanis 4th ed., Ch. 4, infinitesimal dipole"
+  },
+  {
+    "id": "a03-02",
+    "module": "a3-dipoles-monopoles",
+    "topic": "short-dipole Rrad",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "Compute the radiation resistance of a Hertzian (uniform-current) dipole with Delta_l = lambda/10 and with Delta_l = lambda/20.",
+    "answer": "R_r(lambda/10) = 80 pi^2 (0.10)^2 = 7.90 ohm. R_r(lambda/20) = 80 pi^2 (0.05)^2 = 1.97 ohm.",
+    "ref": "Balanis 4th ed., Ch. 4"
+  },
+  {
+    "id": "a03-03",
+    "module": "a3-dipoles-monopoles",
+    "topic": "triangular current",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "How does the radiation resistance of a small dipole with a triangular current distribution compare with that of a uniform-current Hertzian of the same length, and why?",
+    "answer": "It is about one-quarter as large, because the average current is half the terminal current and P_rad (hence R_r referred to the terminal current) scales as the square of that average.",
+    "ref": "Balanis 4th ed., Ch. 4, small dipole"
+  },
+  {
+    "id": "a03-04",
+    "module": "a3-dipoles-monopoles",
+    "topic": "half-wave numbers",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "Quote the usual radiation resistance and directivity of a thin half-wave dipole, and note where the input reactance actually crosses zero.",
+    "answer": "R_r is about 73 ohm at the feed (the current maximum). Directivity is 1.643 (2.15 dBi). The reactance passes through zero at a length slightly under lambda/2; the exact shortening depends on the wire radius.",
+    "ref": "Balanis 4th ed., Ch. 4, half-wave dipole"
+  },
+  {
+    "id": "a03-05",
+    "module": "a3-dipoles-monopoles",
+    "topic": "monopole image",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "How are the radiation resistance and the pattern of a quarter-wave monopole over an infinite perfect ground related to those of a half-wave dipole?",
+    "answer": "The monopole is the top half of the dipole. The pattern for z > 0 is the same. For the same feed current, only half the power is radiated (the lower half-space is gone), so R_r is about 36.5 ohm. Be careful quoting dBi versus dB over a ground plane.",
+    "ref": "Balanis 4th ed., Ch. 4, monopoles"
+  },
+  {
+    "id": "a03-06",
+    "module": "a3-dipoles-monopoles",
+    "topic": "270 GHz bar",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "A 0.200 mm gold bar is driven at 270 GHz (lambda = 1.111 mm) in free space. Treating it as a Hertzian element, what is Delta_l/lambda and R_r? What if the current is triangular?",
+    "answer": "Delta_l/lambda = 0.180. R_r (uniform) = 80 pi^2 (0.180)^2 = 25.6 ohm. Triangular current drops this by about four, to 6.4 ohm. Either way the reactance is a large capacitance, so a bare bar is a poor antenna unless it is embedded in a resonance.",
+    "ref": "Balanis 4th ed., Ch. 4"
+  },
+  {
+    "id": "a03-07",
+    "module": "a3-dipoles-monopoles",
+    "topic": "finite-dipole pattern",
+    "difficulty": 2,
+    "type": "derive",
+    "question": "For a z-directed thin dipole of length L with a sinusoidal current, write the angular factor of E_theta, and specialize it to L = lambda/2.",
+    "answer": "The factor is [cos((kL/2) cos theta) - cos(kL/2)] / sin(theta). For L = lambda/2 this becomes cos((pi/2) cos theta) / sin(theta).",
+    "ref": "Balanis 4th ed., Ch. 4, finite-length dipole"
+  },
+  {
+    "id": "a03-08",
+    "module": "a3-dipoles-monopoles",
+    "topic": "balun reminder",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "Why does soldering a coax onto one arm of a dipole, with the shield grabbing the other arm, not measure the dipole's Z_in?",
+    "answer": "That feed is unbalanced: the coax shield becomes part of a monopole-plus-feed-line radiator. The measured S11 is of that hybrid structure, not of a balanced dipole. A balun or a well-modeled transition is required.",
+    "ref": "Balanis 4th ed., Ch. 4 and Ch. 16"
+  },
+  {
+    "id": "a04-01",
+    "module": "a4-loops",
+    "topic": "small-loop duality",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "What is the far-field pattern of a small loop in the xy-plane, and in what sense is it dual to a z-directed Hertzian dipole?",
+    "answer": "It is a sin(theta) doughnut, the same shape as a z-directed short dipole, but with E in the phi direction (a magnetic dipole). Duality maps the small loop's E onto the short dipole's H, and vice versa. Directivity is still 1.5.",
+    "ref": "Balanis 4th ed., Ch. 5"
+  },
+  {
+    "id": "a04-02",
+    "module": "a4-loops",
+    "topic": "small-loop Rrad formula",
+    "difficulty": 1,
+    "type": "derive",
+    "question": "Write the radiation resistance of a single-turn small loop of circumference C (or area A) in free space.",
+    "answer": "R_r = 20 pi^2 (C/lambda)^4 ohms. Equivalently, to a very close approximation, R_r = 31200 (A/lambda^2)^2 ohms with A = pi a^2.",
+    "ref": "Balanis 4th ed., Ch. 5"
+  },
+  {
+    "id": "a04-03",
+    "module": "a4-loops",
+    "topic": "loop at a = lambda/25",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "A single-turn loop has radius a = lambda/25. Compute C/lambda and R_r in ohms, and cross-check with the 31200 (A/lambda^2)^2 formula.",
+    "answer": "C/lambda = 2 pi/25 = 0.2513. R_r = 20 pi^2 (0.2513)^4 = 0.788 ohm. A/lambda^2 = pi/625 = 0.005027, and 31200*(0.005027)^2 = 0.788 ohm.",
+    "ref": "Balanis 4th ed., Ch. 5"
+  },
+  {
+    "id": "a04-04",
+    "module": "a4-loops",
+    "topic": "loop at 270 GHz",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "At 270 GHz (lambda = 1.111 mm), what is the physical radius of an a = lambda/25 loop, in micrometers? For a loop with C = lambda/3, compute R_r.",
+    "answer": "a = 1.111 mm / 25 = 44.4 um. For C = lambda/3, C/lambda = 0.333, R_r = 20 pi^2 (1/3)^4 = 2.44 ohm. The uniform-current assumption is already fraying at C ~ lambda/3.",
+    "ref": "Balanis 4th ed., Ch. 5"
+  },
+  {
+    "id": "a04-05",
+    "module": "a4-loops",
+    "topic": "N-turn and probes",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "How does R_r of a still-small N-turn loop scale with N, and why are small loops useful as probes even when they are poor radiators?",
+    "answer": "Neglecting proximity, R_r scales as N^2. A small loop is a poor radiator because R_r is tiny next to conductor loss, but it responds to H and can be made electrically small, which is exactly what you want in a magnetic near-field probe (ideally in a shielded-loop construction that rejects E-field pickup).",
+    "ref": "Balanis 4th ed., Ch. 5"
+  },
+  {
+    "id": "a05-01",
+    "module": "a5-arrays",
+    "topic": "array factor",
+    "difficulty": 1,
+    "type": "derive",
+    "question": "Write the array factor of an N-element uniformly excited, uniformly spaced linear array, including the definition of psi. How is AF usually normalized for plots?",
+    "answer": "AF(psi) = sin(N psi/2) / sin(psi/2), with psi = k d cos(theta) + beta, where theta is from the array axis and beta is the progressive phase. The plotted (normalized) factor is |AF|/N, which equals 1 at psi = 0.",
+    "ref": "Balanis 4th ed., Ch. 6"
+  },
+  {
+    "id": "a05-02",
+    "module": "a5-arrays",
+    "topic": "beam steering",
+    "difficulty": 2,
+    "type": "derive",
+    "question": "Where is the main beam of a uniform linear array, and what beta gives broadside, ordinary endfire, and a beam at a chosen theta_0?",
+    "answer": "The main beam is at psi = 0, i.e. cos(theta_0) = -beta/(k d). Broadside: beta = 0 (theta = 90 deg). Ordinary endfire: beta = -/+ k d (theta = 0 or 180 deg). A chosen theta_0: beta = -k d cos(theta_0).",
+    "ref": "Balanis 4th ed., Ch. 6"
+  },
+  {
+    "id": "a05-03",
+    "module": "a5-arrays",
+    "topic": "N=8 first nulls",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "For an N = 8, d = lambda/2, broadside (beta = 0) uniform array, compute the first-null angles (theta from the array axis) and the first-null beamwidth.",
+    "answer": "psi = pi cos(theta). First nulls at psi = ±2 pi/8 = ±pi/4, so cos(theta) = ±1/4, theta = 75.52 deg and 104.48 deg. FNBW = 28.96 deg (29.0 deg to three figures).",
+    "ref": "Balanis 4th ed., Ch. 6"
+  },
+  {
+    "id": "a05-04",
+    "module": "a5-arrays",
+    "topic": "HPBW approximation",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "For the same N = 8, d = lambda/2 broadside array, evaluate the large-N approximation HPBW ≈ 0.886 lambda/(N d) in degrees, and compare it with the numerical value 12.82 deg.",
+    "answer": "0.886 * (lambda/(N d)) = 0.886 * 2/8 = 0.2215 rad = 12.69 deg, within a couple of tenths of a degree of the numerical 12.82 deg already at N = 8.",
+    "ref": "Balanis 4th ed., Ch. 6"
+  },
+  {
+    "id": "a05-05",
+    "module": "a5-arrays",
+    "topic": "scan phase",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "For N elements with d = lambda/2, what progressive phase beta (in degrees) steers the main beam to theta = 60 deg from the array axis?",
+    "answer": "beta = -k d cos(60 deg) = -pi * 0.5 = -pi/2 = -90 deg.",
+    "ref": "Balanis 4th ed., Ch. 6"
+  },
+  {
+    "id": "a05-06",
+    "module": "a5-arrays",
+    "topic": "grating lobes",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "When do grating lobes appear, and what spacing rule of thumb prevents them for a broadside array?",
+    "answer": "A grating lobe appears when psi can be 0 and also a multiple of 2 pi for a different visible theta. For a broadside array the usual preventative is d <= lambda/2; endfire and heavily scanned arrays need tighter spacing. Horns packed at d ~ lambda will have grating lobes.",
+    "ref": "Balanis 4th ed., Ch. 6"
+  },
+  {
+    "id": "a05-07",
+    "module": "a5-arrays",
+    "topic": "pattern multiplication",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "State the pattern-multiplication principle, and give one case where the element pattern punches a hole that the AF cannot fill.",
+    "answer": "For identical, identically oriented elements, the total far-field is the single-element pattern times the array factor (referred to a common phase center). A broadside array of z-directed dipoles still has a null along the element axis, because the element pattern is zero there.",
+    "ref": "Balanis 4th ed., Ch. 6"
+  },
+  {
+    "id": "a05-08",
+    "module": "a5-arrays",
+    "topic": "tapers",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "What do a binomial taper and a Dolph-Chebyshev taper buy you, and what do they cost?",
+    "answer": "Binomial: in the ideal isotropic-element case, sidelobes vanish, at the cost of a fatter main beam and lower directivity than a uniform array. Dolph-Chebyshev: the narrowest main beam for a prescribed (equal) sidelobe level. Both are amplitude tapers; mutual coupling will perturb them in a real array.",
+    "ref": "Balanis 4th ed., Ch. 6"
+  },
+  {
+    "id": "a05-09",
+    "module": "a5-arrays",
+    "topic": "mutual coupling",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "Why does a real closely spaced array not have the isolated-element pattern times AF, and why is this acute for THz horn arrays?",
+    "answer": "Mutual coupling changes both the embedded element pattern and the driving-point impedance (edge vs center elements differ). At THz, a horn mouth is itself ~ lambda, so packing is often at d ~ lambda, which both couples the elements and invites grating lobes.",
+    "ref": "Balanis 4th ed., Ch. 6"
+  },
+  {
+    "id": "a06-01",
+    "module": "a6-aperture-horns",
+    "topic": "aperture directivity",
+    "difficulty": 1,
+    "type": "derive",
+    "question": "Write the first-cut directivity of an aperture of area A and aperture efficiency e_a.",
+    "answer": "D = 4 pi A e_a / lambda^2. The factor e_a collects taper efficiency and, in a real antenna used as a gain formula, also phase error, spillover, and sometimes ohmic loss.",
+    "ref": "Balanis 4th ed., Ch. 12"
+  },
+  {
+    "id": "a06-02",
+    "module": "a6-aperture-horns",
+    "topic": "uniform vs tapered",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "Why does a uniform aperture have the highest directivity for a given area, and what does a TE10 taper do to the sidelobes?",
+    "answer": "For a given area, a uniform field has the tightest Fourier transform (narrowest main beam / highest D) at the cost of high (~13.3 dB) first sidelobes. A TE10 (cosine) taper, the natural open-ended-waveguide field, lowers the taper efficiency (around 0.8 from taper alone) and drops the first H-plane sidelobe well below 13 dB.",
+    "ref": "Balanis 4th ed., Ch. 12"
+  },
+  {
+    "id": "a06-03",
+    "module": "a6-aperture-horns",
+    "topic": "open WR3.4",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "Why is an open-ended WR3.4 waveguide a poor 'antenna' at 270 GHz, and what does flaring into a horn buy you?",
+    "answer": "The aperture is only 0.86 mm x 0.43 mm, i.e. 0.78 lambda x 0.39 lambda, so the directivity is modest (single-digit dBi) and the pattern is very wide. Flaring increases A, hence D, at the cost of a quadratic phase error that an 'optimum' horn flare balances against the extra area.",
+    "ref": "Balanis 4th ed., Ch. 12–13"
+  },
+  {
+    "id": "a06-04",
+    "module": "a6-aperture-horns",
+    "topic": "horn gain estimate",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "A pyramidal horn has an 8.00 mm x 6.00 mm aperture and is used at 270 GHz (c = 3.00e8 m/s). Taking e_a = 0.50, compute the gain as a linear ratio and in dBi. What would e_a = 1 give, in dBi?",
+    "answer": "lambda = 1.111 mm, A = 48.0 mm^2. G = 0.50 * 4 pi A / lambda^2 = 244 = 23.9 dBi. The uniform-aperture ceiling (e_a = 1) is 3.01 dB higher, 26.9 dBi, and is not achievable with a simple flare.",
+    "ref": "Balanis 4th ed., Ch. 13, horn antennas"
+  },
+  {
+    "id": "a06-05",
+    "module": "a6-aperture-horns",
+    "topic": "horn far field",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "For the 8 mm x 6 mm horn of the previous item, using the diagonal D = 10.0 mm as the maximum dimension, what is 2 D^2/lambda at 270 GHz, in meters?",
+    "answer": "2 D^2 / lambda = 2*(0.010)^2 / 1.111e-3 = 0.180 m. A 1 m bench path is comfortably far-field for this horn alone.",
+    "ref": "Balanis 4th ed., Ch. 2 and Ch. 13"
+  },
+  {
+    "id": "a06-06",
+    "module": "a6-aperture-horns",
+    "topic": "corrugated horn",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "What is a corrugated (scalar) horn for, in one or two sentences?",
+    "answer": "Corrugations enforce a hybrid HE11-like aperture field rather than raw TE10, giving a nearly symmetric beam and low cross-pol -- which is what you want when the horn feeds a reflector or a quasi-optical bench.",
+    "ref": "Balanis 4th ed., Ch. 13"
+  },
+  {
+    "id": "a07-01",
+    "module": "a7-reflectors",
+    "topic": "paraboloid gain",
+    "difficulty": 1,
+    "type": "derive",
+    "question": "Write the gain of a circular paraboloid of diameter D and aperture efficiency eta_A, and list the usual contributors to eta_A.",
+    "answer": "G = eta_A (pi D / lambda)^2 = eta_A * 4 pi A / lambda^2, with A = pi D^2/4. eta_A typically 0.5-0.7, budgeted into illumination, spillover, blockage, phase error, and surface accuracy.",
+    "ref": "Balanis 4th ed., Ch. 15"
+  },
+  {
+    "id": "a07-02",
+    "module": "a7-reflectors",
+    "topic": "30 cm dish",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "A 30.0 cm circular paraboloid is used at 270 GHz (c = 3.00e8 m/s) with eta_A = 0.60. Compute the gain in linear units and in dBi, and the uniform-aperture ceiling in dBi.",
+    "answer": "G = 0.60 * (pi * 0.300 / 1.111e-3)^2 = 4.32e5 = 56.35 dBi. The eta_A = 1 ceiling is 58.57 dBi, i.e. 2.22 dB higher, consistent with 0.60 = -2.22 dB.",
+    "ref": "Balanis 4th ed., Ch. 15"
+  },
+  {
+    "id": "a07-03",
+    "module": "a7-reflectors",
+    "topic": "HPBW rule of thumb",
+    "difficulty": 1,
+    "type": "calc",
+    "question": "Using HPBW ≈ 70 lambda/D degrees, what is the half-power beamwidth of that 30.0 cm dish at 270 GHz?",
+    "answer": "70 * 1.111 mm / 300 mm = 0.26 deg.",
+    "ref": "Balanis 4th ed., Ch. 15"
+  },
+  {
+    "id": "a07-04",
+    "module": "a7-reflectors",
+    "topic": "far field of a dish",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "What is 2 D^2 / lambda for a 30.0 cm aperture at 270 GHz, in meters? Can you measure its far-field pattern in a 3 m lab?",
+    "answer": "2 D^2 / lambda = 2*(0.300)^2 / 1.111e-3 = 162 m. No: you need a near-field scan, a compact range / collimating mirror, or a focus-to-focus coupling measurement.",
+    "ref": "Balanis 4th ed., Ch. 15 and Ch. 16"
+  },
+  {
+    "id": "a07-05",
+    "module": "a7-reflectors",
+    "topic": "Ruze",
+    "difficulty": 3,
+    "type": "calc",
+    "question": "Ruze's approximation is eta_surface ≈ exp[-(4 pi epsilon_rms / lambda)^2]. At 270 GHz (lambda = 1.111 mm), what is eta_surface (linear and in dB) for epsilon_rms = 50 um, and for 100 um?",
+    "answer": "For 50 um: 4 pi epsilon/lambda = 0.565, eta = 0.726 = -1.39 dB. For 100 um: 4 pi epsilon/lambda = 1.13, eta = 0.278 = -5.55 dB. A 100 um 'pretty flat' dish is a destroyed THz antenna.",
+    "ref": "Balanis 4th ed., Ch. 15 (surface tolerance / Ruze)"
+  },
+  {
+    "id": "a07-06",
+    "module": "a7-reflectors",
+    "topic": "f/D trade",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "What is the illumination / spillover trade in choosing f/D for a single paraboloid?",
+    "answer": "A low f/D (deep dish) lets a moderately directive feed under-illuminate the rim, reducing spillover, but the feed sits in a more poorly matched, higher-cross-pol environment. A high f/D wants a more directive feed (often a corrugated horn) or a dual-reflector (Cassegrain) layout. Over-illuminate and you pay in spillover; under-illuminate and you throw away aperture.",
+    "ref": "Balanis 4th ed., Ch. 15"
+  },
+  {
+    "id": "a08-01",
+    "module": "a8-microstrip-patch",
+    "topic": "resonant length",
+    "difficulty": 1,
+    "type": "derive",
+    "question": "Write the resonant-length estimate for a rectangular microstrip patch, including the fringing extension.",
+    "answer": "L + 2 Delta L = lambda_0 / (2 sqrt(eps_eff)), where eps_eff is the microstrip effective permittivity and Delta L is an end-extension of order h (Hammerstad-style). The physical length is therefore a bit shorter than a half-wave in the substrate.",
+    "ref": "Balanis 4th ed., Ch. 14"
+  },
+  {
+    "id": "a08-02",
+    "module": "a8-microstrip-patch",
+    "topic": "starting L and W",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "For a 10.00 GHz patch on eps_r = 3.66, compute the no-fringing length L0 = c/(2 f sqrt(eps_r)) and a starting width W = c/(2 f sqrt((eps_r+1)/2)), in mm. Use c = 3.00e8 m/s.",
+    "answer": "L0 = 7.84 mm. W = 9.83 mm.",
+    "ref": "Balanis 4th ed., Ch. 14"
+  },
+  {
+    "id": "a08-03",
+    "module": "a8-microstrip-patch",
+    "topic": "bandwidth vs substrate",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "How does fractional impedance bandwidth of a patch scale with substrate height and eps_r, and what goes wrong if you just make the substrate thick?",
+    "answer": "Fractional bandwidth scales roughly with h/lambda and is larger for smaller eps_r. A thick or high-eps_r substrate that you hoped would buy bandwidth can invite surface waves, poorer radiation efficiency, and pattern breakup. 1-2% on a thin microwave substrate is normal; 10% wants a thicker or stacked design, or a different antenna.",
+    "ref": "Balanis 4th ed., Ch. 14"
+  },
+  {
+    "id": "a08-04",
+    "module": "a8-microstrip-patch",
+    "topic": "inset feed",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "Why is an inset (or a probe placed inward from the edge) used, and what is the usual first estimate of how R_in varies with position?",
+    "answer": "The radiation-edge resistance is often 100-300 ohm, too high for 50 ohm. Moving the feed inward walks R_in down. The cavity-model estimate is R(x) proportional to cos^2(pi x / L) measured from the edge.",
+    "ref": "Balanis 4th ed., Ch. 14, feed methods"
+  },
+  {
+    "id": "a08-05",
+    "module": "a8-microstrip-patch",
+    "topic": "THz scaling",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "If you naively scaled the 10 GHz, eps_r = 3.66, L0 = 7.84 mm patch to 270 GHz, what would L0 be, in mm? Why is the same 0.203 mm board unusable there?",
+    "answer": "Length scales as 1/f, so L0 = 7.84 mm * 10/270 = 0.290 mm. The 0.203 mm board is then 0.18 lambda thick -- surface-wave city -- so a THz patch lives on a much thinner film or on a designed back-side-reflector substrate.",
+    "ref": "Balanis 4th ed., Ch. 14"
+  },
+  {
+    "id": "a08-06",
+    "module": "a8-microstrip-patch",
+    "topic": "typical single-patch D",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "What directivity range is typical of a single rectangular patch, and how is it polarized?",
+    "answer": "Typically about 5-8 dBi, with a broad broadside beam, linearly polarized along the resonant length L. An array of patches (plus the array-factor chapter) is how you buy more gain, at the cost of mutual coupling, especially in the E-plane.",
+    "ref": "Balanis 4th ed., Ch. 14"
+  },
+  {
+    "id": "a09-01",
+    "module": "a9-broadband-frequency-independent",
+    "topic": "Rumsey",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "State Rumsey's frequency-independence principle, and what actually sets the band edges of a real spiral.",
+    "answer": "An antenna specified only by angles (its geometry in wavelengths looks the same at every frequency) has, in principle, a frequency-independent pattern and impedance. Truncation sets the edges: the outer radius sets f_min, the inner radius (and the feed) sets f_max. The active region of a spiral is a ring about one wavelength in circumference that slides inward as frequency rises.",
+    "ref": "Balanis 4th ed., Ch. 11"
+  },
+  {
+    "id": "a09-02",
+    "module": "a9-broadband-frequency-independent",
+    "topic": "fat dipole vs spiral",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "Distinguish a fat dipole / bow-tie from a truly frequency-independent spiral or LPDA, in terms of typical bandwidth.",
+    "answer": "A fat dipole or bow-tie is still a (lower-Q) resonance: maybe 2:1 of usable VSWR, with a lowest frequency set by overall length and a highest frequency set by pattern breakup. A spiral or log-periodic can cover a decade, with the pattern and impedance staying useful over that range (up to truncation and the feed).",
+    "ref": "Balanis 4th ed., Ch. 9–11"
+  },
+  {
+    "id": "a09-03",
+    "module": "a9-broadband-frequency-independent",
+    "topic": "spiral sizing",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "Size a planar spiral to cover 2.00 GHz to 8.00 GHz using the conservative C = lambda rule. Give a_out and a_in in mm. Use c = 3.00e8 m/s.",
+    "answer": "a_out >= lambda_max / (2 pi) = 23.9 mm. a_in <= lambda_min / (2 pi) = 6.0 mm. In practice you add margin on both ends, plus a broadband balun.",
+    "ref": "Balanis 4th ed., Ch. 11"
+  },
+  {
+    "id": "a09-04",
+    "module": "a9-broadband-frequency-independent",
+    "topic": "THz spiral",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "Using the same C = lambda rule, size a spiral that starts at 110 GHz and runs through 330 GHz. Give a_out and a_in in mm. Use c = 3.00e8 m/s.",
+    "answer": "a_out >= 3.00e8 / (2 pi * 110e9) = 0.434 mm. a_in <= 3.00e8 / (2 pi * 330e9) = 0.145 mm. This is a lithography problem, not a wire-bending problem.",
+    "ref": "Balanis 4th ed., Ch. 11"
+  },
+  {
+    "id": "a09-05",
+    "module": "a9-broadband-frequency-independent",
+    "topic": "axial-mode helix",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "State the usual circumference and pitch-angle conditions for an axial-mode helix, its polarization, and whether it is frequency-independent in the Rumsey sense.",
+    "answer": "C ≈ lambda and a pitch angle around 12-14 deg. It is a circularly polarized endfire antenna of modest bandwidth (maybe 1.5:1 to 2:1), very useful as a feed, but it is not frequency-independent in the Rumsey sense because a length (the circumference) is fixed in the design.",
+    "ref": "Balanis 4th ed., Ch. 10, helical antennas"
+  },
+  {
+    "id": "a10-01",
+    "module": "a10-measurements",
+    "topic": "two-antenna gain",
+    "difficulty": 1,
+    "type": "derive",
+    "question": "Write the two-identical-antenna Friis formula for gain, in linear and dB form.",
+    "answer": "G_t G_r = (P_r / P_t) * (4 pi R / lambda)^2, and if the antennas are identical, G_dBi = (1/2) [ P_r - P_t + 20 log10(4 pi R / lambda) ], with powers in dB.",
+    "ref": "Balanis 4th ed., Ch. 16"
+  },
+  {
+    "id": "a10-02",
+    "module": "a10-measurements",
+    "topic": "two-horn number",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "Two nominally identical horns, 1.00 m apart at 270 GHz, give P_r/P_t = -41.07 dB. The free-space path loss is 81.07 dB. What gain does the two-identical-antenna method report, in dBi?",
+    "answer": "2 G_dBi = -41.07 + 81.07 = 40.00, so G = 20.00 dBi.",
+    "ref": "Balanis 4th ed., Ch. 16"
+  },
+  {
+    "id": "a10-03",
+    "module": "a10-measurements",
+    "topic": "mismatch correction",
+    "difficulty": 2,
+    "type": "calc",
+    "question": "In the previous measurement, each horn has S11 = -15 dB (0.14 dB mismatch loss) and P_r/P_t was an uncorrected VNA S21. Is 20.00 dBi an IEEE gain or a realized gain? What is the other one?",
+    "answer": "An uncorrected S21 reports realized gain, so 20.00 dBi is realized. IEEE gain is 20.00 + 0.14 = 20.14 dBi (add back one antenna's mismatch if only the AUT is being corrected, or be careful to apply both ends consistently). Do not apply the mismatch correction twice.",
+    "ref": "Balanis 4th ed., Ch. 16"
+  },
+  {
+    "id": "a10-04",
+    "module": "a10-measurements",
+    "topic": "three-antenna",
+    "difficulty": 1,
+    "type": "concept",
+    "question": "What does the three-antenna method buy you that the two-identical-antenna method does not?",
+    "answer": "It drops the assumption that the two antennas are identical. You measure all three pairs and solve the three Friis equations for the three unknown gains. A comparison (substitution) method, by contrast, uses a trusted standard-gain horn and a stable path.",
+    "ref": "Balanis 4th ed., Ch. 16"
+  },
+  {
+    "id": "a10-05",
+    "module": "a10-measurements",
+    "topic": "leading THz errors",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "List four leading errors in a THz bench gain measurement, and one thing you should do about multiple reflections.",
+    "answer": "Not being in the far field (compute 2 D^2/lambda); multiple reflections (standing-wave ripple as you move R by a few lambda/2); polarization mismatch; uncertain R or a stale extender cal / flange torque. Average, dither R, time-gate, or absorb to knock down the ripple, and do not claim accuracy tighter than the ripple you actually saw.",
+    "ref": "Balanis 4th ed., Ch. 16"
+  },
+  {
+    "id": "a10-06",
+    "module": "a10-measurements",
+    "topic": "efficiency inference",
+    "difficulty": 2,
+    "type": "concept",
+    "question": "How is radiation efficiency usually obtained at WR3.4, if a Wheeler cap is awkward?",
+    "answer": "Infer it as the ratio of a measured realized (or IEEE) gain to a computed or near-field-integrated directivity. A Wheeler-cap or calorimetric measurement of R_loss vs R_r + R_loss is standard at UHF and awkward at THz.",
+    "ref": "Balanis 4th ed., Ch. 16"
+  }
+]

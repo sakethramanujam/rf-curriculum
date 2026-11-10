@@ -117,22 +117,41 @@ export function equationBlock(def: EquationDef, onLink?: (control: string) => vo
   };
 
   btn.addEventListener('click', () => { pinned = !exploded; setExploded(!exploded); });
-  spans.forEach((s) => {
-    s.addEventListener('pointerenter', (e) => {
-      if (e.pointerType !== 'mouse') return;
-      if (!exploded) setExploded(true);
-      setActive(s.dataset.term!);
-    });
-    s.addEventListener('click', () => {
-      pinned = true;
-      if (!exploded) setExploded(true);
-      setActive(active === s.dataset.term ? null : s.dataset.term!);
-      if (matchMedia('(max-width: 760px)').matches) {
-        cards.get(s.dataset.term!)?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  // KaTeX stacks fraction rows in overlapping "vlist" boxes, so the element under the
+  // pointer is often not the term itself. Hit-test against the term boxes instead.
+  const hitTerm = (x: number, y: number): string | null => {
+    let best: string | null = null, area = Infinity;
+    for (const sp of spans) {
+      const r = sp.getBoundingClientRect();
+      if (x >= r.left - 2 && x <= r.right + 2 && y >= r.top - 2 && y <= r.bottom + 2 && r.width * r.height < area) {
+        area = r.width * r.height; best = sp.dataset.term!;
       }
-    });
+    }
+    return best;
+  };
+  let hoverId: string | null = null;
+  math.addEventListener('pointermove', (e) => {
+    if (e.pointerType !== 'mouse') return;
+    const id = hitTerm(e.clientX, e.clientY);
+    math.style.cursor = id ? 'pointer' : '';
+    if (id === hoverId) return;
+    hoverId = id;
+    if (!id) return;
+    if (!exploded) setExploded(true);
+    setActive(id);
+  });
+  math.addEventListener('click', (e) => {
+    const id = hitTerm(e.clientX, e.clientY);
+    if (!id) return;
+    pinned = true;
+    if (!exploded) setExploded(true);
+    setActive(active === id && e.pointerType === 'mouse' ? id : active === id ? null : id);
+    if (matchMedia('(max-width: 760px)').matches) {
+      window.setTimeout(() => cards.get(id)?.scrollIntoView({ block: 'nearest', behavior: 'smooth' }), 350);
+    }
   });
   root.addEventListener('pointerleave', (e) => {
+    hoverId = null;
     if (e.pointerType === 'mouse' && !pinned && exploded) setExploded(false);
   });
   cards.forEach((c, id) => {

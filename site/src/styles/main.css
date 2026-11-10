@@ -270,27 +270,31 @@ table.mini th { color: var(--faint); font-weight: 600; font-size: 0.75rem; text-
 table.mini td.num { font-family: var(--mono); text-align: right; }
 
 /* ───────── Exploding equations ───────── */
-.eqs { display: grid; gap: 14px; }
+.eqs { display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr); }
 .eq {
   background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px 12px; box-shadow: var(--shadow);
-  position: relative;
+  position: relative; min-width: 0;
 }
 .eq-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
 .eq-head h3 { margin: 0; font-size: 0.98rem; }
 .eq-head .btn { min-height: 34px; font-size: 0.82rem; }
 .eq-math { position: relative; overflow-x: auto; overflow-y: hidden; padding: 18px 4px 14px; text-align: center; font-size: clamp(1.02rem, 2.8vw, 1.35rem); -webkit-overflow-scrolling: touch; }
 .eq-math .katex-display { margin: 0; }
+.eq-math > .katex-display > .katex { white-space: nowrap; }
+body { overflow-x: hidden; }
+.wrap, .viz, .controls, .card { min-width: 0; }
 .eq-math [data-term] {
   display: inline-block; cursor: pointer; border-radius: 6px; padding: 0 1px;
   transition: transform 0.55s var(--ease), margin 0.55s var(--ease), color 0.3s, background 0.3s, opacity 0.3s, filter 0.3s;
 }
 .eq-math [data-term]:hover { background: color-mix(in srgb, var(--tc, var(--acc)) 18%, transparent); }
 .eq.exploded .eq-math [data-term] { margin: 0 0.42em; color: var(--tc, var(--acc)); background: color-mix(in srgb, var(--tc, var(--acc)) 12%, transparent); }
-.eq.exploded .eq-math [data-term].up { transform: translateY(-0.22em) scale(1.06); }
-.eq.exploded .eq-math [data-term].dn { transform: translateY(0.22em) scale(1.06); }
+.eq.exploded .eq-math [data-term] { animation: pop 0.55s var(--ease) both; }
+.eq.exploded .eq-math [data-term].dn { animation-delay: 60ms; }
+@keyframes pop { 0% { transform: scale(1); } 45% { transform: scale(1.18); } 100% { transform: scale(1.04); } }
 .eq.exploded .eq-math .katex-html > .base > *:not([data-term]) { opacity: 0.55; }
 .eq.exploded.has-active .eq-math [data-term]:not(.active) { opacity: 0.35; filter: saturate(0.5); }
-.eq.exploded .eq-math [data-term].active { transform: translateY(-0.4em) scale(1.22); box-shadow: 0 0 0 2px var(--tc, var(--acc)); }
+.eq.exploded .eq-math [data-term].active { animation: none; transform: scale(1.12); box-shadow: 0 0 0 2px var(--tc, var(--acc)); background: color-mix(in srgb, var(--tc, var(--acc)) 26%, transparent); }
 .eq svg.leads { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
 .eq svg.leads path { fill: none; stroke-width: 1.6; stroke-dasharray: 3 4; }
 .eq-terms { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; max-height: 0; overflow: hidden; transition: max-height 0.6s var(--ease), margin 0.4s; }
@@ -308,7 +312,7 @@ table.mini td.num { font-family: var(--mono); text-align: right; }
 .term .t-mean { color: var(--muted); line-height: 1.45; }
 .term .t-unit { font-family: var(--mono); font-size: 0.78rem; color: var(--faint); }
 .term a { font-size: 0.82rem; font-weight: 600; text-decoration: none; }
-.term a::after { content: ' ↗'; }
+.term a::after { content: ' →'; }
 .eq-note { font-size: 0.84rem; color: var(--faint); margin: 6px 0 0; }
 
 .foot { margin-top: 60px; border-top: 1px solid var(--line); padding: 22px clamp(14px, 3.5vw, 28px) calc(22px + env(safe-area-inset-bottom)); font-size: 0.85rem; color: var(--faint); text-align: center; }

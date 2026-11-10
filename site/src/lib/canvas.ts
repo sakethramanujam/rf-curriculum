@@ -40,7 +40,9 @@ export function surface(canvas: HTMLCanvasElement, opts: SurfaceOpts, onResize: 
   };
   const ro = new ResizeObserver(fit);
   ro.observe(canvas.parentElement!);
-  fit();
+  // Defer the first fit so callers can finish wiring (their callbacks may reference
+  // the returned handle or state declared after this call).
+  queueMicrotask(fit);
   return { s, destroy: () => ro.disconnect(), fit };
 }
 

@@ -234,7 +234,7 @@ export default function mount(root: HTMLElement) {
     while (hi < M && v[hi + 1] < v[hi]) hi++;
     let sl = 0;
     for (let i = 1; i < M; i++) if ((i < lo || i > hi) && v[i] >= v[i - 1] && v[i] >= v[i + 1]) sl = Math.max(sl, v[i]);
-    ro.set('sll', sl > 0 ? `${(20 * Math.log10(sl / mx)).toFixed(1)} dB` : '—');
+    ro.set('sll', sl <= 0 ? '—' : sl / mx > 0.99 ? 'grating lobe, 0 dB' : `${(20 * Math.log10(sl / mx)).toFixed(1)} dB`, sl / mx > 0.99 ? 'badv' : undefined);
     const L = lobes();
     const ng = Math.max(0, L.length - (Number.isFinite(a0) ? 1 : 0));
     ro.set('gl', ng ? `${ng} visible` : 'none', ng ? 'badv' : 'good');

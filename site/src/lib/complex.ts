@@ -32,6 +32,8 @@ export const isFiniteC = (a: C): boolean => Number.isFinite(a.re) && Number.isFi
 
 export function fmt(a: C, digits = 2, unit = ''): string {
   if (!isFiniteC(a)) return '∞';
+  const z = (v: number) => (Math.abs(v) < 0.5 * 10 ** -digits ? 0 : v);
+  a = c(z(a.re), z(a.im));
   const re = a.re.toFixed(digits);
   const s = a.im < 0 ? '−' : '+';
   return `${re} ${s} j${Math.abs(a.im).toFixed(digits)}${unit ? ' ' + unit : ''}`;

@@ -63,7 +63,7 @@ export default function mount(root: HTMLElement) {
       p.paths.push(rot, shunt);
       const len = st.net === 'open-stub' ? s.lOpen : s.lShort;
       p.notes.push(`<b>Step 2.</b> Move d = ${s.d.toFixed(4)} λ toward the generator (clockwise on the |Γ| circle) until the point lands on g = 1. There y = 1 ${bN >= 0 ? '+' : '−'} j${Math.abs(bN).toFixed(3)}.`);
-      p.notes.push(`<b>Step 3.</b> A ${st.net === 'open-stub' ? 'open' : 'short'}-circuited shunt stub of length ℓ = ${len.toFixed(4)} λ adds ${bN >= 0 ? '−' : '+'}j${Math.abs(bN).toFixed(3)}, sliding along g = 1 to the centre. Matched.`);
+      p.notes.push(`<b>Step 3.</b> ${st.net === 'open-stub' ? 'An open' : 'A short'}-circuited shunt stub of length ℓ = ${len.toFixed(4)} λ adds ${bN >= 0 ? '−' : '+'}j${Math.abs(bN).toFixed(3)}, sliding along g = 1 to the centre. Matched.`);
       p.table = [['Stub position d', `${s.d.toFixed(4)} λ`], ['Stub length ℓ', `${len.toFixed(4)} λ`], ['Line susceptance at d', `${bN.toFixed(3)} (normalised)`], ['Solutions available', String(sols.length)]];
       return p;
     }

@@ -11,10 +11,12 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "guard": "node scripts/privacy-guard.mjs dist"
   },
   "devDependencies": {
     "@types/katex": "^0.16.8",
+    "@types/node": "^22.20.5",
     "typescript": "~5.9.3",
     "vite": "^8.3.7",
     "vitest": "^5.1.0"

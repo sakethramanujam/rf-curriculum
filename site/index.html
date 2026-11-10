@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0a0e16" />
+    <meta name="description" content="Explorable electromagnetics: plane waves, transmission lines, Smith charts, S-parameters, waveguides, dipoles, phased arrays and link budgets you can drag, tap and break apart." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0e16'/%3E%3Cpath d='M6 32c6-14 10-14 13 0s7 14 13 0 7-14 13 0 7 14 13 0' fill='none' stroke='%23ff7a59' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E" />
+    <title>Field Notes — explorable RF &amp; electromagnetics</title>
+    <script>
+      // Apply the saved theme before first paint to avoid a flash.
+      try {
+        var t = localStorage.getItem('rfc-theme');
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="topbar">
+      <a class="brand" href="#/" aria-label="Field Notes home">
+        <svg viewBox="0 0 40 20" aria-hidden="true"><path d="M2 10c3-7 5-7 6.5 0s3.5 7 6.5 0 3.5-7 6.5 0 3.5 7 6.5 0 3.5-7 6.5 0" /></svg>
+        <span>Field&nbsp;Notes</span>
+      </a>
+      <nav class="topnav" aria-label="Explorers">
+        <button class="menu-btn" aria-expanded="false" aria-controls="nav-list" type="button">Explore</button>
+        <ul id="nav-list"></ul>
+      </nav>
+      <button class="theme-btn" type="button" aria-label="Switch to light theme" title="Toggle light / dark">
+        <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3M4.6 4.6l2.1 2.1M17.3 17.3l2.1 2.1M4.6 19.4l2.1-2.1M17.3 6.7l2.1-2.1"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/></svg>
+      </button>
+    </header>
+    <main id="main" tabindex="-1"></main>
+    <footer class="foot">
+      <p>
+        Original explanations written for self-study alongside Pozar, <em>Microwave Engineering</em> (4th ed.) and
+        Balanis, <em>Antenna Theory</em> (4th ed.). No book text or figures are reproduced.
+        <a href="https://github.com/sakethramanujam/rf-curriculum">Source &amp; study notes on GitHub</a>.
+      </p>
+    </footer>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>
